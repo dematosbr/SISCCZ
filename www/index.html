@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>SisCCZ</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
+	<script src="https://use.fontawesome.com/1b0c60bcba.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+	
+</head>
+<body class="fadeIn">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+                <img class="img-resp m-b-16" src="imagens/logo/logo2018.png" alt="SisCCZ">
+			
+				<div class="login100-form validate-form flex-sb flex-w">
+                    
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Preenchimento obrigatório">
+						<input class="input100" type="text" name="usuario" id="usuario" placeholder="Usuário">
+						<span class="focus-input100"></span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Preenchimento obrigatório">
+						<input class="input100" type="password" name="senha" id="senha" placeholder="Senha">
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="container-login100-form-btn m-t-5">
+						<button class="login100-form-btn" name="login" id="login">
+							Entrar
+						</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	
+<!--===============================================================================================-->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
+	<script>
+		$(document).ready(function(){
+			$('#usuario').focus();
+			$('.validate-form .input100').each(function(){
+			    $(this).focus(function(){
+			        hideValidate(this);
+			    });
+			});
+			function showValidate(input) {
+				var thisAlert = $(input).parent();
+		 		$(thisAlert).addClass('alert-validate');
+		    }
+		    function hideValidate(input) {
+		        var thisAlert = $(input).parent();
+		        $(thisAlert).removeClass('alert-validate');
+		    }
+			/*LOGIN*/
+			$('#senha').keypress(function(e){
+				var CodTecla = e.which;
+				if (CodTecla == 13){
+					$('#login').trigger('click');
+				}
+			});
+			$('#login').click(function(e){
+				var check = true;
+			    var input = $('.validate-input .input100');
+		        for(var i=0; i<input.length; i++) {
+		            if(validate(input[i]) == false){
+		                showValidate(input[i]);
+		                check=false;
+		            }
+		        }
+			    function validate (input) {
+			        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
+			            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+			                return false;
+			            }
+			        }
+			        else {
+			            if($(input).val().trim() == ''){
+			                return false;
+			            }
+			        }
+			    }
+				if (check == true) {
+					$.post('http://10.1.20.29/sisccz/php/login/login.php',{usuario: $('#usuario').val(), senha:$('#senha').val()},
+						function(data) {
+							if(data=='usuario nao encontrado') {
+								$('#usuario').focus();
+								swal({   
+									text: 'Usuário não encontrado.',
+									icon: "imagens/logo/logo2018h300.png",
+									closeModal: false,
+									closeOnClickOutside: false,	
+									closeOnEsc: false
+								}).then(function() {
+							        swal.close();
+							        $('#usuario').val('')
+							        $('#usuario').focus();
+								});	
+							} else if(data=='senha errada'){
+								$('#senha').focus();
+								swal({   
+									text: 'Senha incorreta.',
+									icon: "imagens/logo/logo2018h300.png",
+									closeModal: false,
+									closeOnClickOutside: false,	
+									closeOnEsc: false
+								}).then(function() {
+							        swal.close();
+							        $('#senha').val('')
+							        $('#senha').focus();
+								});	
+							} else if(data=='efetuar login') {
+								window.location.href = ('http://10.1.20.29/sisccz/paginas/principal');
+							} else {
+								swal({   
+									text: 'Ocorreu um erro.'.data,
+									icon: "imagens/logo/logo2018h300.png",
+								});	
+							}
+						}
+					);
+				}
+			});
+		});			
+    </script>
+</body>
+</html>

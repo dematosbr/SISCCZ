@@ -1,0 +1,53 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Arimo');
+
+
+.swal-overlay {
+  background-color: rgba(237, 236, 236, 0.999);
+}
+.swal-modal {
+  background-color: #2a3945;
+  border-radius: 0;
+}
+
+.swal-text {
+  font-family:"Arimo";
+  font-weight:normal;
+  font-size:20px;
+  padding: 17px;
+  display: block;
+  margin: 22px;
+  text-align: center;
+  color:#EAEAEA;
+}
+
+.swal-button{
+  font-family:"Arimo";
+  font-weight:bolder;
+  font-size: 20px;
+  text-transform: uppercase;
+  padding: 7px 19px;
+  border-radius: 0px;
+  background-color: #e7c22f;
+  color: #0f1922;
+  height: 62px;
+  width:120px;
+  border:0;
+
+}
+
+.swal-button--confirm {
+  background-color: #e7c22f;
+  color: #0f1922;
+  
+}
+
+.swal-button--confirm:hover {
+  background-color: #ad8b03;
+  color: #0f1922;
+}
+
+.swal-button--confirm:focus {
+  border:0;
+  outline:0;
+  
+}

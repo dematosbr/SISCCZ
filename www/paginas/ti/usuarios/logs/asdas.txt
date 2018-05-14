@@ -1,0 +1,1 @@
+<b>[INSERIR USUARIO]</b><br> | <i>usuário : </i>ASDAS | <i>senha : </i> ****** | <i>nome : </i>SELECT * FROM TBL | <i>sexo : </i>1 | <i>apelido : </i>SDFSD | <i>matricula : </i>SDFSD<br><b> | INSERIDO POR </b>[ljunior]<br><b> | DATA</b> [10/05/2018 16:35:26] <br><b>[FIM]</b><br><hr>

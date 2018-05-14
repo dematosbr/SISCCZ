@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<META http-equiv="Page-Enter" CONTENT="RevealTrans(Duration=3.0)">
+	<title>SisCCZ</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="../../../../images/icons/favicon.ico"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
+	<script src="https://use.fontawesome.com/1b0c60bcba.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../../../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../../../../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../../../../css/sweetalert.css">
+</head>
+<body class="fadeIn">
+	<nav class="navbar fixed-top navbar-expand-sm bg-dark-degrade navbar-dark">
+		<a class="navbar-brand justify-content-sm-end" href="">
+           	<img src="../../../../imagens/logo/logo2018h300.png" class="img-fluid" alt="SisCCZ Logo">
+       	</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+	<br/>
+	<nav class="navbar navbar-expand-sm bg-dark-degrade fixed-top-2">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-light fs-22 py-0" href="../../../arboviroses">Arboviroses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fs-22 py-0" href="../../../animais">Animais</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fs-22 py-0" href="../../../zoo">ZOO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fs-22 py-0" href="../../../rh">RH</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fs-22 py-0" href="../../../adm">ADM</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fs-22 py-0" href="../../../ti">TI</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light fs-22 py-0" href="../../../mapas">Mapas</a>
+                </li>
+            </ul>
+        </div>
+   	</nav>
+	<main role="main" class="container-fluid p-t-135 p-b-40">
+		<nav aria-label="breadcrumb" class="d-none d-sm-block d-md-block d-lg-block">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="../../../principal">SisCCZ</a></li>
+		    <li class="breadcrumb-item"><a href="../../../ti">TI</a></li>
+		    <li class="breadcrumb-item"><a href="../../usuarios">Usuários</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Inserir</li>
+		  </ol>
+		</nav>
+		<div class="row text-center">
+	    	<div class="col-sm-12 text-center">
+     			<h1 class="display-5">Inserir</h1>
+     		</div>
+    	</div>
+    	<div class="m-2" name="form_usuarios" id="form_usuarios">
+  			<div class="form-row">
+				<div class="form-group col-md-8">
+			    	<label class="fs-20">Nome</label>
+					<div class="wrap-inputsis">
+						<input class="inputsis required text-up" type="text" name="nome" id="nome">
+						<span class="focus-inputsis"></span>
+				    </div>
+			  	</div>
+				<div class="form-group col-md-4">
+			    	<label class="fs-20">Usuário</label>
+					<div class="wrap-inputsis">
+						<input class="inputsis required text-up" type="text" name="usuario" id="usuario">
+						<span class="focus-inputsis"></span>
+					</div>
+  				</div>
+  			</div>
+  			<div class="form-row">
+				<div class="form-group col-md-3">
+			    	<label class="fs-20">Senha</label>
+					<div class="wrap-inputsis">
+						<input class="inputsis desabilitado required" type="text" name="senha" id="senha" readonly tabindex="-1">
+						<span class="focus-inputsis"></span>
+					</div>
+  				</div>
+				<div class="form-group col-md-3">
+			    	<label class="fs-20">Apelido</label>
+					<div class="wrap-inputsis">
+						<input class="inputsis required text-up" type="text" name="apelido" id="apelido" placeholder="">
+						<span class="focus-inputsis"></span>
+					</div>
+  				</div>
+				<div class="form-group col-md-3">
+			    	<label class="fs-20">Matrícula</label>
+					<div class="wrap-inputsis">
+						<input class="inputsis required text-up" type="text" name="matricula" id="matricula" placeholder="" maxlength="6">
+						<span class="focus-inputsis"></span>
+					</div>
+  				</div>
+				<div class="form-group col-md-3">
+			    	<label class="fs-20">Sexo</label>
+					<div class="wrap-inputsis">
+				    	<select class="inputsis required" id="sexo" name="sexo">
+							<option value="" selected></option>
+							<option value="0">MASCULINO</option>
+							<option value="1">FEMININO</option>
+				    	</select>
+						<span class="focus-inputsis"></span>
+					</div>
+  				</div>
+  			</div>
+  			<div class="form-row">
+				<div class="form-group col-md-4">
+					<div class="wrap-inputsis">
+						<button class="sisccz-btn" name="bt_usuarios_inserir" id="bt_usuarios_inserir">
+							Salvar
+						</button>
+					</div>
+				</div>
+  			</div>
+		</div>
+	</main>
+	<br>
+    <footer class="footer">
+		<div class="container text-center">
+			<img src="../../../../imagens/logo/nomefooter.png" class="img-fluid" alt="SisCCZ Logo">      
+		</div>
+    </footer>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
+	<script>
+		$(document).ready(function(){
+        	var codigo_sistema = '060101';
+			$.post('http://10.1.20.29/sisccz/paginas/ti/sistemas/php/sistemas_acesso_pesquisar.php',{codigo_sistema:codigo_sistema},
+				function(acesso) {
+			    	/*GERAR SENHA TEMPORARIA*/
+		       		var tamanho = 8, maiusculas = true, numeros = true, simbolos = false, lmin = 'abc', lmai = 'ABC', num = '123', simb = '@%', retorno = '', caracteres = '';
+					caracteres += lmin;
+					if (maiusculas) caracteres += lmai;
+					if (numeros) caracteres += num;
+					if (simbolos) caracteres += simb;
+					var len = caracteres.length;
+					for (var n = 1; n <= tamanho; n++) {
+						var rand = parseInt((Math.random()*(len-1))+1);
+						retorno += caracteres[rand-1];
+					}
+					$('#senha').val(retorno);
+			    	/*FOCO - AUTOCOMPLETAR*/
+					$('#nome').focus();
+					/*VERIFICANDO USUARIO */
+					$("#usuario").focusout(function (){
+						var usuario = $('#usuario').val();
+						$.post('http://10.1.20.29/sisccz/paginas/ti/usuarios/php/usuarios_pesquisar.php',{usuario:usuario} ,
+							function(data) {
+								if (data != 'usuario nao encontrado'){
+									$('#usuario').val('');
+									$('#senha').val(retorno);
+									swal({   
+										text:'Usuário já existente.' ,
+										icon: "../../../../imagens/logo/logo2018h300.png",
+										closeModal: false,
+										closeOnClickOutside: false,	
+										closeOnEsc: false
+									}).then(function() {
+								        swal.close();
+								        $('#usuario').focus();
+									});	
+								}
+							}
+						);
+					});
+					/*INSERIR USUARIO */
+					$("#bt_usuarios_inserir").click(function(e){
+						var erros = 0;
+						$('#form_usuarios .required').each(function(){
+							if ($(this).val() == '') { 
+								erros++ ;
+								if (!$(this).attr('readonly')){
+									$(this).css({'background-color' : '#DFD8D1'});
+								}
+							} else {
+								if (!$(this).attr('readonly')){
+									$(this).css({'background-color' : '#FFFFFF'});
+								}		
+							}
+						});
+						if (erros > 0 ){
+							$('#nome').focus();
+							swal({   
+								text:'Você deve preencher todos os campos obrigatórios.' ,
+								icon: "../../../../imagens/logo/logo2018h300.png",
+								closeModal: false,
+								closeOnClickOutside: false,	
+								closeOnEsc: false
+							}).then(function() {
+							       swal.close();
+							       $('#nome').focus();
+							});	
+					    }else{
+							$.post('http://10.1.20.29/sisccz/paginas/ti/usuarios/php/usuarios_inserir.php',$('input, select').serialize(),
+								function(data) {
+									if (data=='inserido') {
+										var usuario = $("#usuario").val();
+										var senha = $("#senha").val();
+										$('input').val('');
+										$('select').val('');
+										swal({   
+											text:'Usuário inserido com sucesso. [Usuário: '+usuario+' Senha: '+senha+'] Você deseja inserir outro usuário?' ,
+											icon: "../../../../imagens/logo/logo2018h300.png",
+											closeModal: false,
+											closeOnClickOutside: false,	
+											closeOnEsc: false,
+											buttons: {
+												Sim: true,
+												Não: true,
+											}
+										}).then(function(value) {
+											switch (value) {
+												case "Sim":
+													window.location = ('http://10.1.20.29/sisccz/paginas/ti/usuarios/inserir');
+      												break;
+    											case "Não":
+													window.location = ('http://10.1.20.29/sisccz/paginas/ti/usuarios');
+      												break;
+      										}
+										});	
+									} else {
+										swal({   
+											text:"Ocorreu um erro.",
+											icon: "../../../../imagens/logo/logo2018h300.png",
+											closeModal: false,
+											closeOnClickOutside: false,	
+											closeOnEsc: false
+										}).then(function() {
+										       swal.close();
+										       $('#nome').focus();
+										});	
+									
+									}
+								}
+							);
+						}		
+					});
+				},'json'
+			).fail(function(){
+				swal({title: 'SisCCZ', text: 'Voc\u00ea não permissão para acessar essa função do sistema.', type: 'error',	confirmButtonColor: '#F44336'},
+				function(){window.location.href = ('http://10.1.20.29/sisccz/paginas/principal/index.html');});
+			});
+		});			
+    </script>
+</body>
+</html>

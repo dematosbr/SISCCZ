@@ -1,0 +1,1 @@
+<b>[INSERIR USUARIO]</b><br> | <i>usuário : </i>OMATOS | <i>senha : </i> ****** | <i>nome : </i>OLIVIA COSTA MATOS | <i>sexo : </i>1 | <i>apelido : </i>IA | <i>matricula : </i>124578<br><b> | INSERIDO POR </b>[ljunior]<br><b> | DATA</b> [10/05/2018 16:26:36] <br><b>[FIM]</b><br><hr>

@@ -1,0 +1,1 @@
+<b>[INSERIR USUARIO]</b><br> | <i>usuário : </i>DASDASDSAD | <i>senha : </i> ****** | <i>nome : </i>VITORIA OLIVIA | <i>sexo : </i>1 | <i>apelido : </i>ASDASDAS | <i>matricula : </i>DASD<br><b> | INSERIDO POR </b>[ljunior]<br><b> | DATA</b> [10/05/2018 16:29:48] <br><b>[FIM]</b><br><hr>

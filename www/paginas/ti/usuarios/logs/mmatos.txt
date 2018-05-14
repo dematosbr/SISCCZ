@@ -1,0 +1,1 @@
+<b>[INSERIR USUARIO]</b><br> | <i>usuário : </i>MMATOS | <i>senha : </i> ****** | <i>nome : </i>MARIA VITORIA COSTA MATOS | <i>sexo : </i>1 | <i>apelido : </i>TOIA | <i>matricula : </i>147899<br><b> | INSERIDO POR </b>[ljunior]<br><b> | DATA</b> [10/05/2018 16:22:48] <br><b>[FIM]</b><br><hr>

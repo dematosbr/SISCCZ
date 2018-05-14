@@ -1,0 +1,1 @@
+<b>[INSERIR USUARIO]</b><br> | <i>usuário : </i>FSDFSD | <i>senha : </i> ****** | <i>nome : </i>FSDSDFSDFSD | <i>sexo : </i>0 | <i>apelido : </i>DFSDFSD | <i>matricula : </i>FSDFSD<br><b> | INSERIDO POR </b>[ljunior]<br><b> | DATA</b> [09/05/2018 16:58:33] <br><b>[FIM]</b><br><hr>
