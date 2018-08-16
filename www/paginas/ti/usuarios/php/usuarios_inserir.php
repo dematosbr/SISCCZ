@@ -28,20 +28,23 @@ if ($_POST){
 		$insere_sql->bindParam(':sexo', mb_strtoupper(retirarEspeciais( $_POST['sexo']),'UTF-8'));
 		if ($insere_sql->execute()) {
 			echo 'inserido';
-			$query_parametros = (
-				' | <i>usuário : </i>'.mb_strtoupper(retirarEspeciais($_POST['usuario']),'UTF-8').
-				' | <i>senha : </i> ******'.
-				' | <i>nome : </i>'.mb_strtoupper(retirarEspeciais($_POST['nome']),'UTF-8').
-				' | <i>sexo : </i>'.mb_strtoupper(retirarEspeciais($_POST['sexo']),'UTF-8').
-				' | <i>apelido : </i>'.mb_strtoupper(retirarEspeciais($_POST['apelido']),'UTF-8').
-				' | <i>matricula : </i>'.mb_strtoupper(retirarEspeciais($_POST['matricula'],'UTF-8'))
-			);
-			$fp = fopen($root.'/sisccz/paginas/ti/usuarios/logs/'.$_POST['usuario'].'.txt', 'a');
-			$escreve = fwrite($fp, '<b>[INSERIR USUARIO]</b><br>'.$query_parametros.'<br><b> | INSERIDO POR </b>['.$login.']<br><b> | DATA</b> ['.date('d/m/Y H:i:s').'] <br><b>[FIM]</b><br><hr>');
-			fclose($fp);
-			$fp2 = fopen($root.'/sisccz/paginas/ti/usuarios/logs/'.$login.'.txt', 'a');
-			$escreve2 = fwrite($fp2, '<b>[INSERIR USUARIO]</b><br>'.$query_parametros.'<br><b> | DATA</b> ['.date('d/m/Y H:i:s').'] <br><b>[FIM]</b><br><hr>');
-			fclose($fp2);
+			$query_parametros = ( 
+			'[ USUÁRIO | <i>'.mb_strtoupper(retirarEspeciais($_POST['usuario']),'UTF-8').'</i> ] '.
+			'[ SENHA | <i>******</i> ] '.
+			'[ NOME | <i>'.mb_strtoupper(retirarEspeciais($_POST['nome']),'UTF-8').'</i> ] '.
+			'[ SEXO | <i>'.mb_strtoupper(retirarEspeciais($_POST['sexo']),'UTF-8').'</i> ] '.
+			'[ APELIDO | <i>'.mb_strtoupper(retirarEspeciais($_POST['apelido']),'UTF-8').'</i> ] '.
+			'[ MATRÍCULA | <i>'.mb_strtoupper(retirarEspeciais($_POST['matricula'],'UTF-8')).'</i> ]');
+			//LOG
+			$filename = $root.'/sisccz/paginas/ti/usuarios/logs/'.$_POST['usuario'].'.txt';
+			$file_data = '<b>[INSERIR USUARIO]</b> ['.date('d/m/Y H:i:s').'] [INSERIDO POR '.$login.']<br>'.$query_parametros.'<br><hr><br>';
+			if (file_exists($filename)){ $file_data .= file_get_contents($filename);}
+			file_put_contents($root.'/sisccz/paginas/ti/usuarios/logs/'.$_POST['usuario'].'.txt', $file_data);
+			//LOG LOGIN
+			$filename = $root.'/sisccz/paginas/ti/usuarios/logs/'.$login.'.txt';
+			$file_data = '<b>[INSERIR USUARIO]</b> ['.date('d/m/Y H:i:s').']<br>'.$query_parametros.'<hr><br>';
+			if (file_exists($filename)){ $file_data .= file_get_contents($filename);}
+			file_put_contents($root.'/sisccz/paginas/ti/usuarios/logs/'.$login.'.txt', $file_data);
 		} else {
 			echo 'Ocorreu um erro.';
 		}

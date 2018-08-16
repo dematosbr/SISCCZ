@@ -5,9 +5,9 @@
 	<title>SisCCZ</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="../../../../images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="../../../../imagens/icone/favicon.ico"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
-	<script src="https://use.fontawesome.com/1b0c60bcba.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="../../../../css/util.css">
 	<link rel="stylesheet" type="text/css" href="../../../../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../../../../css/sweetalert.css">
@@ -22,32 +22,7 @@
 		</button>
 	</nav>
 	<br/>
-	<nav class="navbar navbar-expand-sm bg-dark-degrade fixed-top-2">
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-light fs-22 py-0" href="../../../arboviroses">Arboviroses</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light fs-22 py-0" href="../../../animais">Animais</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light fs-22 py-0" href="../../../zoo">ZOO</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light fs-22 py-0" href="../../../rh">RH</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light fs-22 py-0" href="../../../adm">ADM</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light fs-22 py-0" href="../../../ti">TI</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light fs-22 py-0" href="../../../mapas">Mapas</a>
-                </li>
-            </ul>
-        </div>
+	<nav class="navbar navbar-expand-sm bg-dark-degrade fixed-top-2 navbar-menu">
    	</nav>
 	<main role="main" class="container-fluid p-t-135 p-b-40">
 		<nav aria-label="breadcrumb" class="d-none d-sm-block d-md-block d-lg-block">
@@ -137,12 +112,48 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
 	<script>
 		$(document).ready(function(){
-        	var codigo_sistema = '060101';
-			$.post('http://10.1.20.29/sisccz/paginas/ti/sistemas/php/sistemas_acesso_pesquisar.php',{codigo_sistema:codigo_sistema},
+			$('#overlay').css({display:'none'});
+			//SESSION
+			$.post('../../../../php/login/session.php',
+				function(retorno) {
+					if (retorno[0].primeiro_acesso == 1 || retorno[0].primeiro_acesso == 3){
+						if (!$('.form_editar_perfil')[0]) {
+							window.location.href = ('../../../../paginas/principal/editar_perfil');
+						}
+					} else {
+						if ($('.container-login100')[0]) {
+						   	window.location.href = ('../../../../paginas/principal');
+						} else {
+							session_usuario = retorno[0].usuario;
+							session_nome = retorno[0].nome;
+							session_genero = retorno[0].genero;
+							session_apelido = retorno[0].apelido;
+							session_ultimo_acesso = retorno[0].ultimo_acesso ;
+							var datac = new Date();
+							var hoje = datac.getFullYear()+'-'+("0" + (datac.getMonth() + 1)).slice(-2)+'-'+("0" + datac.getDate()).slice(-2);
+							$('#nome_usuario_sessao').text(session_apelido);
+							if (hoje != session_ultimo_acesso){
+								$.post('../../../../php/login/session_atualiza.php',function(retorno) {});
+							}
+						}
+					}
+				},'json'
+			)
+			.fail(function(){
+				if (!$('.container-login100')[0]) {
+			    	window.location.href = ('../../../../');
+			    }
+		  	});
+			//MENU
+			$('.navbar-menu').load("../../../../paginas/principal/menu.html");
+			//PERMISSÃO
+			$.post('../../../../paginas/ti/sistemas/php/sistemas_acesso_pesquisar.php',{codigo_sistema:'06010002'},
 				function(acesso) {
-			    	/*GERAR SENHA TEMPORARIA*/
-		       		var tamanho = 8, maiusculas = true, numeros = true, simbolos = false, lmin = 'abc', lmai = 'ABC', num = '123', simb = '@%', retorno = '', caracteres = '';
-					caracteres += lmin;
+					//FOCO
+					$('#nome').focus();
+			    	//GERAR SENHA TEMPORARIA
+		       		var tamanho = 4, minusculas = false, maiusculas = true, numeros = true, simbolos = false, lmin = 'abc', lmai = 'ABC', num = '123', simb = '@%', retorno = '', caracteres = '';
+					if (minusculas) caracteres += lmin;
 					if (maiusculas) caracteres += lmai;
 					if (numeros) caracteres += num;
 					if (simbolos) caracteres += simb;
@@ -152,12 +163,10 @@
 						retorno += caracteres[rand-1];
 					}
 					$('#senha').val(retorno);
-			    	/*FOCO - AUTOCOMPLETAR*/
-					$('#nome').focus();
-					/*VERIFICANDO USUARIO */
+					//VERIFICAR USUARIO
 					$("#usuario").focusout(function (){
 						var usuario = $('#usuario').val();
-						$.post('http://10.1.20.29/sisccz/paginas/ti/usuarios/php/usuarios_pesquisar.php',{usuario:usuario} ,
+						$.post('../../../../paginas/ti/usuarios/php/usuarios_pesquisar.php',{usuario:usuario} ,
 							function(data) {
 								if (data != 'usuario nao encontrado'){
 									$('#usuario').val('');
@@ -176,7 +185,7 @@
 							}
 						);
 					});
-					/*INSERIR USUARIO */
+					//INSERIR USUARIO
 					$("#bt_usuarios_inserir").click(function(e){
 						var erros = 0;
 						$('#form_usuarios .required').each(function(){
@@ -204,7 +213,7 @@
 							       $('#nome').focus();
 							});	
 					    }else{
-							$.post('http://10.1.20.29/sisccz/paginas/ti/usuarios/php/usuarios_inserir.php',$('input, select').serialize(),
+							$.post('../../../../paginas/ti/usuarios/php/usuarios_inserir.php',$('input, select').serialize(),
 								function(data) {
 									if (data=='inserido') {
 										var usuario = $("#usuario").val();
@@ -212,7 +221,7 @@
 										$('input').val('');
 										$('select').val('');
 										swal({   
-											text:'Usuário inserido com sucesso. [Usuário: '+usuario+' Senha: '+senha+'] Você deseja inserir outro usuário?' ,
+											text:'Usuário inserido com sucesso.'+"\n"+'Usuário: '+usuario+' Senha: '+senha+'.'+"\n"+'Você deseja inserir outro usuário?' ,
 											icon: "../../../../imagens/logo/logo2018h300.png",
 											closeModal: false,
 											closeOnClickOutside: false,	
@@ -224,10 +233,10 @@
 										}).then(function(value) {
 											switch (value) {
 												case "Sim":
-													window.location = ('http://10.1.20.29/sisccz/paginas/ti/usuarios/inserir');
+													window.location = ('../../../../paginas/ti/usuarios/inserir');
       												break;
     											case "Não":
-													window.location = ('http://10.1.20.29/sisccz/paginas/ti/usuarios');
+													window.location = ('../../../../paginas/ti/usuarios');
       												break;
       										}
 										});	
@@ -242,7 +251,6 @@
 										       swal.close();
 										       $('#nome').focus();
 										});	
-									
 									}
 								}
 							);
@@ -250,9 +258,17 @@
 					});
 				},'json'
 			).fail(function(){
-				swal({title: 'SisCCZ', text: 'Voc\u00ea não permissão para acessar essa função do sistema.', type: 'error',	confirmButtonColor: '#F44336'},
-				function(){window.location.href = ('http://10.1.20.29/sisccz/paginas/principal/index.html');});
-			});
+				swal({   
+					text: 'Acesso Negado.',
+					icon: "../../../../imagens/logo/logo2018h300.png",
+					closeModal: false,
+					closeOnClickOutside: false,	
+					closeOnEsc: false
+				}).then(function() {
+				    swal.close();
+				  	window.location.href = ('../../../../paginas/principal'); 
+				});
+        	});
 		});			
     </script>
 </body>

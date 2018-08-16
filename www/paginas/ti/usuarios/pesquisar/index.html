@@ -8,6 +8,7 @@
 	<link rel="icon" type="image/png" href="../../../../imagens/icone/favicon.ico"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css">
 	<link rel="stylesheet" type="text/css" href="../../../../css/util.css">
 	<link rel="stylesheet" type="text/css" href="../../../../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../../../../css/sweetalert.css">
@@ -30,17 +31,45 @@
 		    <li class="breadcrumb-item"><a href="../../../principal">SisCCZ</a></li>
 		    <li class="breadcrumb-item"><a href="../../../ti">TI</a></li>
 		    <li class="breadcrumb-item"><a href="../../usuarios">Usuários</a></li>
-		    <li class="breadcrumb-item active" aria-current="page">Editar</li>
+		    <li class="breadcrumb-item active" aria-current="page">Pesquisar</li>
 		  </ol>
 		</nav>
+		<div id="overlay">
+		    <img src="../../../../imagens/loader/loader.gif" alt="Carregando..." /><br/>
+		    Por favor, aguarde.
+		</div>		
 		<div class="row text-center">
 	    	<div class="col-sm-12 text-center">
-     			<h1 class="display-5">Editar</h1>
+     			<h1 class="display-5">Pesquisar</h1>
      		</div>
     	</div>
-    	<div class="m-2" name="form_usuarios" id="form_usuarios">
+    	<div class="m-2" name="form_filtro" id="form_filtro">
   			<div class="form-row">
-				<div class="form-group col-md-4">
+		    	<div class="col-sm-12 m-b-10">
+	     			<h1 class="display-6">Filtro</h1>
+	     		</div>
+	     	</div>
+  			<div class="form-check form-check-inline">
+				<div class="radio">
+					<label class="fs-24 m-r-20">
+						<input type="radio" name="RadioOptionsBusca" id="RadioOptionsBusca" value="option1">
+					    <span class="cr"><i class="cr-icon fa fa-times"></i></span>
+					    Usuário
+			    	</label>
+				</div>
+				<div class="radio">
+					<label class="fs-24">
+						<input type="radio" name="RadioOptionsBusca" id="RadioOptionsBusca" value="option2">
+					    <span class="cr"><i class="cr-icon fa fa-times"></i></span>
+					    Nome
+			    	</label>
+				</div>
+				
+  			</div>
+    	</div>
+    	<div class="m-2 hide" name="form_pesquisar_usuario" id="form_pesquisar_usuario">
+  			<div class="form-row">
+				<div class="form-group col-md-8">
 			    	<label class="fs-20">Usuário</label>
 					<div class="wrap-inputsis">
 						<input class="inputsis required text-up" type="text" name="usuario" id="usuario">
@@ -49,21 +78,40 @@
   				</div>
 				<div class="form-group col-md-4">
 					<div class="wrap-inputsis m-t-30">
-						<button class="sisccz-btn-line" name="bt_usuarios_pesquisar" id="bt_usuarios_pesquisar">
+						<button class="sisccz-btn-line" name="bt_pesquisar_usuario" id="bt_pesquisar_usuario">
 							Pesquisar
 						</button>
 					</div>
 				</div>
   			</div>
 		</div>
-    	<div class="m-3" name="form_usuarios_resultado" id="form_usuarios_resultado">
+    	<div class="m-2 hide" name="form_pesquisar_nome" id="form_pesquisar_nome">
+  			<div class="form-row">
+				<div class="form-group col-md-12">
+			    	<label class="fs-20">Nome</label>
+					<div class="wrap-inputsis">
+						<input class="inputsis required text-up" type="text" name="nome_busca" id="nome_busca">
+						<span class="focus-inputsis"></span>
+					</div>
+  				</div>
+  			</div>
+		</div>
+    	<div class="m-2" name="form_usuarios_resultado_busca_nome" id="form_usuarios_resultado_busca_nome">
+  			<div class="form-row">
+				<div class="form-group col-md-12">
+					<div class="table-responsive" id="tabela_pesquisa">
+					</div>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="m-2" name="form_usuarios_resultado" id="form_usuarios_resultado">
   			<div class="form-row ">
 				<div class="form-group col-md-12">
 					<nav>
 				  		<div class="nav nav-tabs" id="nav-tab" role="tablist">
 				    		<a class="nav-item nav-link active fs-20" id="nav-dados-tab" data-toggle="tab" href="#nav-dados" role="tab" aria-controls="nav-dados" aria-selected="true">Dados</a>
-				    		<a class="nav-item nav-link fs-20" id="nav-senha-tab" data-toggle="tab" href="#nav-senha" role="tab" aria-controls="nav-senha" aria-selected="false">Senha</a>
 				    		<a class="nav-item nav-link fs-20" id="nav-acessos-tab" data-toggle="tab" href="#nav-acessos" role="tab" aria-controls="nav-acessos" aria-selected="false">Acessos</a>
+				    		<a class="nav-item nav-link fs-20" id="nav-log-tab" data-toggle="tab" href="#nav-log" role="tab" aria-controls="nav-log" aria-selected="false">Log</a>
 				  		</div>
 					</nav>
 					<div class="tab-content m-3" id="nav-tabContent">
@@ -73,14 +121,15 @@
 			        	           	<div class="form-group col-sm-4">
 				                  		<label class="fs-20">Usuário</label>
 				                  		<div class="wrap-inputsis">
-				        	           		<input type="text" class="inputsis required text-lowercase desabilitado" name="usuario2" id="usuario2" readonly tabindex="-1">
+				        	           		<input type="text" class="inputsis required text-lowercase desabilitado" name="usuario2" id="usuario2" disabled>
+					  						<input type="hidden" class="" name="fo" id="fo">
 											<span class="focus-inputsis"></span>
 										</div>
 				                	</div>
 									<div class="form-group col-sm-8">
 			                  			<label class="fs-20">Nome</label>
 				                  		<div class="wrap-inputsis">
-			        	           			<input type="text" class="inputsis required text-up" name="nome" id="nome">
+			        	           			<input type="text" class="inputsis required text-up desabilitado" name="nome" id="nome" disabled>
 											<span class="focus-inputsis"></span>
 										</div>
 				                    </div>
@@ -89,21 +138,21 @@
 									<div class="form-group col-sm-4">
 				                  		<label class="fs-20">Apelido</label>
 				                  		<div class="wrap-inputsis">
-				        	           		<input type="text" class="inputsis required text-up" name="apelido" id="apelido">
+				        	           		<input type="text" class="inputsis required text-up desabilitado" name="apelido" id="apelido" disabled>
 											<span class="focus-inputsis"></span>
 										</div>
 				                    </div>
 									<div class="form-group col-sm-4">
 			                  			<label class="fs-20">Matrícula</label>
 				                  		<div class="wrap-inputsis">
-			        	           			<input type="text" class="inputsis required text-up" name="matricula" id="matricula">
+			        	           			<input type="text" class="inputsis required text-up desabilitado" name="matricula" id="matricula" disabled>
 											<span class="focus-inputsis"></span>
 										</div>
 				                    </div>
 									<div class="form-group col-md-4">
 								    	<label class="fs-20">Sexo</label>
 										<div class="wrap-inputsis">
-									    	<select class="inputsis required text-up" id="sexo" name="sexo">
+									    	<select class="inputsis required text-up desabilitado" id="sexo" name="sexo" disabled>
 												<option value="" selected></option>
 												<option value="0">MASCULINO</option>
 												<option value="1">FEMININO</option>
@@ -111,43 +160,32 @@
 											<span class="focus-inputsis"></span>
 										</div>
 					  				</div>
-				            	</div>
-					  			<div class="form-row">
-									<div class="form-group col-md-4">
-										<div class="wrap-inputsis">
-											<button class="sisccz-btn" name="bt_usuarios_editar" id="bt_usuarios_editar">
-												Salvar
-											</button>
+								</div>
+								<div class="form-row">				              
+									<div class="form-group col-sm-4">
+				                  		<label class="fs-20">Acessos</label>
+				                  		<div class="wrap-inputsis">
+				        	           		<input type="text" class="inputsis required text-up desabilitado" name="acessos" id="acessos" disabled>
+											<span class="focus-inputsis"></span>
 										</div>
-									</div>
-					  			</div>
+				                    </div>
+									<div class="form-group col-sm-4">
+				                  		<label class="fs-20">Último Acesso</label>
+				                  		<div class="wrap-inputsis">
+				        	           		<input type="text" class="inputsis required text-up desabilitado" name="ultimo_acesso" id="ultimo_acesso" disabled>
+											<span class="focus-inputsis"></span>
+										</div>
+				                    </div>
+				            	</div>
 					  		</div>
 				  		</div>
-					  	<div class="tab-pane fade" id="nav-senha" role="tabpanel" aria-labelledby="nav-senha-tab">
-					  		<div id="form_usuarios_editar_senha" name="form_usuarios_editar_senha">
-						  		<div class="form-row">
-									<div class="form-group col-md-4">
-								    	<label class="fs-20">Senha</label>
-										<div class="wrap-inputsis">
-				        	           		<input type="text" class="inputsis required desabilitado" name="senha" id="senha" readonly tabindex="-1">
-											<span class="focus-inputsis"></span>
-					                    </div>
-					                </div>
-								</div>
-					  			<div class="form-row">
-									<div class="form-group col-md-4">
-										<div class="wrap-inputsis">
-											<button class="sisccz-btn" name="bt_usuarios_editar_senha" id="bt_usuarios_editar_senha">
-												Salvar
-											</button>
-										</div>
-									</div>
-					  			</div>
-					  		</div>
-						</div>
 					  	<div class="tab-pane fade" id="nav-acessos" role="tabpanel" aria-labelledby="nav-acessos-tab">
 					  		<div id="funcoes_sistema" name="funcoes_sistema">
-					  		
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="nav-log" role="tabpanel" aria-labelledby="nav-logab">
+					  		<div>
+					  			<p id="cxlog" name="cxlog"></p>
 					  		</div>
 					  	</div>
 					</div>  				
@@ -164,9 +202,13 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.fa.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 	<script>
 		$(document).ready(function(){
+			$('#overlay').css({display:'none'});
 			//SESSION
 			$.post('../../../../php/login/session.php',
 				function(retorno) {
@@ -201,38 +243,43 @@
 			//MENU
 			$('.navbar-menu').load("../../../../paginas/principal/menu.html");
 			//PERMISSÃO
-			$.post('../../../../paginas/ti/sistemas/php/sistemas_acesso_pesquisar.php',{codigo_sistema:'06010003'},
+			$.post('../../../../paginas/ti/sistemas/php/sistemas_acesso_pesquisar.php',{codigo_sistema:'06010004'},
 				function(acesso) {
-					//FOCO
-					$('#usuario').focus();
-					//OCULTAR EM ALTERAÇÃO
-					$('#usuario').on('keyup',function(){
-						$('#form_usuarios_resultado').css({display:'none'});	
+					//EXIBINDO DIVS POR OPCAO
+					$('input[name="RadioOptionsBusca"]').change(function(e){
+						if($(this).val() == 'option1') {
+					        $('#form_pesquisar_usuario').removeClass('hide');
+					        $('#usuario').focus();
+					        $('#form_pesquisar_nome').addClass('hide');
+							$('#form_usuarios_resultado').css({display:'none'});
+							$('#form_usuarios_resultado_busca_nome').css({display:'none'});	
+				       		$('#nome_busca').val('');
+				       		$('#usuario').val('');
+							$('#usuario').css({'background-color' : '#FFFFFF'});		
+					    } 
+					    if($(this).val() == 'option2') {
+					        $('#form_pesquisar_nome').removeClass('hide');
+					        $('#nome_busca').focus();
+					        $('#form_pesquisar_usuario').addClass('hide');
+							$('#form_usuarios_resultado').css({display:'none'});
+							$('#form_usuarios_resultado_busca_nome').css({display:'none'});	
+				       		$('#nome_busca').val('');
+				       		$('#usuario').val('');
+							$('#usuario').css({'background-color' : '#FFFFFF'});		
+					    }
 					});
 				    //OCULTAR
-					$('#form_usuarios_resultado').css({display:'none'});	
-			    	//GERAR SENHA TEMPORARIA
-		       		var tamanho = 4, minusculas = false, maiusculas = true, numeros = true, simbolos = false, lmin = 'abc', lmai = 'ABC', num = '123', simb = '@%', retorno = '', caracteres = '';
-					if (minusculas) caracteres += lmin;
-					if (maiusculas) caracteres += lmai;
-					if (numeros) caracteres += num;
-					if (simbolos) caracteres += simb;
-					var len = caracteres.length;
-					for (var n = 1; n <= tamanho; n++) {
-						var rand = parseInt((Math.random()*(len-1))+1);
-						retorno += caracteres[rand-1];
-					}
-					$('#senha').val(retorno);
+					$('#form_usuarios_resultado').css({display:'none'});
+					$('#form_usuarios_resultado_busca_nome').css({display:'none'});	
 				    //PESQUISAR USUÁRIO	        		
-				    $('#bt_usuarios_pesquisar').click(function(e){
+				    $('#bt_pesquisar_usuario').click(function(e){
 						//CARREGAR FUNCÕES
-						$('#funcoes_sistema').empty();
 						$('#funcoes_sistema').load('../../../../paginas/ti/sistemas/sistemas_funcoes.html');
 						//OCULTAR FORMULÁRIO
-				    	$('#form_usuarios_resultado').css({display:'none'});	
+				    	$('#form_usuarios_resultado').css({display:'none'});
 						e.preventDefault();
 						var erros = 0;
-						$('#form_usuarios .required').each(function(){
+						$('#form_pesquisar_usuario .required').each(function(){
 							if ($(this).val() == '') { 
 								erros++ ;
 								if (!$(this).attr('readonly')){
@@ -260,12 +307,15 @@
 							$.post('../../../../paginas/ti/usuarios/php/usuarios_pesquisar.php',{usuario:usuario},
 								function(data) {
 									$('select option:selected').attr('selected',null);	
-									$('#form_usuarios_resultado').css({display:'none'});	
+									$('input[type=checkbox]').attr('disabled','true');									
+									$('#form_usuarios_resultado').css({display:'none'});
 									$('#nome').val(data[0].usuarios_nome);
 									$('#usuario2').val(data[0].usuarios_usuario);
 									$('#apelido').val(data[0].usuarios_apelido);
 									$('#matricula').val(data[0].usuarios_matricula);
 									$('#sexo option[value='+data[0].usuarios_sexo+']').attr('selected','selected');
+									$('#acessos').val(data[0].usuarios_n_acessos);
+									$('#ultimo_acesso').val(data[0].usuarios_data_ultimo_acesso);
 									$('#form_usuarios_resultado').fadeIn('slow');	
 									$('#nome').focus();
 									$('.tab-pane').removeClass('active');
@@ -279,7 +329,7 @@
 								},'json'
 							).fail(function(){
 								swal({   
-									text:'Usuário não encontrado.' ,
+									text:'Usuário não encontrado.',
 									icon: "../../../../imagens/logo/logo2018h300.png",
 									closeModal: false,
 									closeOnClickOutside: false,	
@@ -299,126 +349,76 @@
 							  				j++;
 										}
 									},'json'
-								).always(function(){
-									//ALTERAR ACESSO
-									$('.cxs_alterar_acesso').change(function() {
-										var funcao = $(this).attr('value');
-										var usuario = $('#usuario2').val();
-										if(this.checked) {
-											var opcao = 'inserir';
-											$.post('../../../../paginas/ti/usuarios/php/usuarios_acesso_editar.php',{funcao:funcao, usuario:usuario, opcao:opcao}, function() {});
-										} else {
-											var opcao = 'excluir';
-											$.post('../../../../paginas/ti/usuarios/php/usuarios_acesso_editar.php',{funcao:funcao, usuario:usuario, opcao:opcao}, function() {});
-										}
-									});
-								});
+								);
+								$.scrollTo('#nav-dados');
 							});
 						}
 		        	});
-		        	//EDITAR USUÁRIO
-				    $('#bt_usuarios_editar').click(function(e){
-						var erros = 0;
-						$('#form_usuarios_editar .required').each(function(){
-							if ($(this).val() == '') { 
-								erros++ ;
-								$(this).css({'background-color' : '#DFD8D1'});
-							} else {
-								if ($(this).attr('id')!='usuario2'){
-									$(this).css({'background-color' : '#FFFFFF'});
-								}		
-							}
-						});
-						if (erros > 0 ){
-							swal({   
-								text:'Você deve preencher todos os campos obrigatórios.' ,
-								icon: "../../../../imagens/logo/logo2018h300.png",
-								closeModal: false,
-								closeOnClickOutside: false,	
-								closeOnEsc: false
-							}).then(function() {
-							    swal.close();
-								$('#nome').focus();
-							});	
-					    }else{
-							$.post('../../../../paginas/ti/usuarios/php/usuarios_editar.php',$('input, select').serialize(),
-								function(data) {
-									if (data=='editado') {
-										swal({   
-											text:'Dados do usuário editados com sucesso.'+"\n"+'Você deseja editar dados de outro usuário?' ,
-											icon: "../../../../imagens/logo/logo2018h300.png",
-											closeModal: false,
-											closeOnClickOutside: false,	
-											closeOnEsc: false,
-											buttons: {
-												Sim: true,
-												Não: true,
-											}
-										}).then(function(value) {
-											switch (value) {
-												case "Sim":
-													window.location = ('../../../../paginas/ti/usuarios/editar');
-      												break;
-    											case "Não":
-													window.location = ('../../../../paginas/ti/usuarios');
-      												break;
-      										}
-										});	
-									} else {
-										swal({   
-											text:"Ocorreu um erro.",
-											icon: "../../../../imagens/logo/logo2018h300.png",
-											closeModal: false,
-											closeOnClickOutside: false,	
-											closeOnEsc: false
-										}).then(function() {
-										       swal.close();
-										       $('#nome').focus();
-										});	
+		        	//PESQUISAR NOME
+					$('#nome_busca').on('keyup',function() {
+						var valorinputNome = $('#nome_busca').val();
+						$('#form_usuarios_resultado').css({display:'none'});
+						$('#form_usuarios_resultado_busca_nome').css({display:'none'});
+						if(valorinputNome !== "" && valorinputNome !== null && valorinputNome.length >= 5) {
+							$.post('http://10.1.20.29/sisccz/paginas/ti/usuarios/php/usuarios_pesquisar.php', {valorinputNome: valorinputNome, filtro: ''},
+								function(data){
+									var row = '';
+									$('#data-table-command').bootgrid('destroy');
+									$('#tabela_pesquisa').empty();
+									var tamanho = Object.keys(data).length;
+									var i = 0;
+									row = '<table id="data-table-command" class="table table-striped table-vmiddle"><thead><tr><th data-column-id="usuario">Usuário</th><th data-column-id="nome">Nome</th><th data-column-id="matricula">Matrícula</th><th data-column-id="commands" data-formatter="commands" data-sortable="false">Visualizar</th></tr></thead><tbody>';
+				       				while (i<=(tamanho - 1)){
+					       				row = row+'<tr><td>'+data[i].usuarios_usuario+'</td><td>'+data[i].usuarios_nome+'</td><td>'+data[i].usuarios_matricula+'</td><td></td></tr>';
+						       			i++
 									}
-								}
-							);
-						}		
+									row = row +'</tbody></table>';
+									$('#tabela_pesquisa').append(row);
+									$('#form_usuarios_resultado_busca_nome').fadeIn('slow');
+									$("#data-table-command").bootgrid({
+										rowCount:[25,50,100,-1],
+										css:{icon:'icon fa', iconColumns: 'fa-th-list', iconDown: 'fa-chevron-down', iconRefresh: 'fa-sync-alt', iconUp: 'fa-chevron-up', iconSearch:'', pagination: "pagination", paginationButton: "page-link"},
+			 		                	formatters: { "commands": function(column, row) { return "<button type=\"button\" class=\"command-view\" id=\"bt_usuario_visualizar\" data-row-usuario=\""+row.usuario+"\"><span class=\"far fa-eye\"></span></button>";}},
+			 		                	labels: {noResults: "Nenhum resultado encontrado!", all:"Todos", infos:"Mostrando de {{ctx.start}} até {{ctx.end}} de {{ctx.total}} registro(s)", loading:"Por favor, aguarde.", refresh:"Atualizar", search:"Pesquisar"},
+										templates: {pagination: '<ul class="{{css.pagination}}"></ul>',paginationItem: '<li class="page-item"><a class="page-link" data-page="{{ctx.page}}">{{ctx.text}}</a></li>'}
+					           		}).on('loaded.rs.jquery.bootgrid', function(){
+										$('.command-view').click(function(){
+											$('#usuario').val($(this).data("row-usuario"));
+											$('#bt_pesquisar_usuario').trigger('click');
+										});
+									});	
+								},'json'
+							).fail(function(){
+								$('#data-table-command').bootgrid('destroy');
+								$('#tabela_pesquisa').empty();
+								$('#tabela_pesquisa').html('Nenhum resultado encontrado!');
+								$('#form_usuarios_resultado_busca_nome').fadeIn('slow');
+							});
+						} else {
+							$('.resultado').css({display:'none'});
+						}
 					});
-					//EDITAR SENHA
-				    $('#bt_usuarios_editar_senha').click(function(e){
-						$.post('http://10.1.20.29/sisccz/paginas/ti/usuarios/php/usuarios_senha_editar.php',$('input').serialize(),
-							function(data) {
-								if (data=='editado') {
-									swal({   
-										text:'Senha do usuário alterada com sucesso.'+"\n"+'Senha: '+$('#senha').val()+''+"\n"+'Você deseja editar dados de outro usuário?' ,
-										icon: "../../../../imagens/logo/logo2018h300.png",
-										closeModal: false,
-										closeOnClickOutside: false,	
-										closeOnEsc: false,
-										buttons: {
-											Sim: true,
-											Não: true,
-										}
-									}).then(function(value) {
-										switch (value) {
-											case "Sim":
-												window.location = ('../../../../paginas/ti/usuarios/editar');
-      											break;
-    										case "Não":
-												window.location = ('../../../../paginas/ti/usuarios');
-      											break;
-      									}
-									});	
-								} else {
-									swal({   
-										text:"Ocorreu um erro.",
-										icon: "../../../../imagens/logo/logo2018h300.png",
-										closeModal: false,
-										closeOnClickOutside: false,	
-										closeOnEsc: false
-									}).then(function() {
-									       swal.close();
-									});	
-								}
-							}
-						);
+					//CARREGAR LOG
+					$('#nav-log-tab').click(function(){
+						$("#cxlog").empty();
+						var usuario = $('#usuario2').val();
+						var rawFile = new XMLHttpRequest();
+						$('#overlay').fadeIn();
+						$.ajax({
+							url: '../../../../paginas/ti/usuarios/logs/'+usuario+'.txt',
+						   	type: 'POST',
+						   	cache: false
+						}).done(function(data){
+							$("#cxlog").html(data);
+							$('#overlay').css({display:'none'});
+						}).fail(function(){
+							$("#cxlog").html('<h5>Nenhum log encontrado para esse usuário.</h5>');
+							$('#overlay').css({display:'none'});
+						}).always(function(){
+							$('#overlay').css({display:'none'});
+						});
 					}); 
+					//
 				},'json'
 			).fail(function(){
 				swal({   

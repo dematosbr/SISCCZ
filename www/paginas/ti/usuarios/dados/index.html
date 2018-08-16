@@ -4,33 +4,28 @@
 	<title>SisCCZ</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="../../imagens/icone/favicon.ico"/>
+	<link rel="icon" type="image/png" href="../../../../imagens/icone/favicon.ico"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="../../css/util.css">
-	<link rel="stylesheet" type="text/css" href="../../css/main.css">
-	<link rel="stylesheet" type="text/css" href="../../css/sweetalert.css">
+	<script src="https://use.fontawesome.com/1b0c60bcba.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../../../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../../../../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../../../../css/sweetalert.css">
+	
 </head>
 <body class="fadeIn">
-	<nav class="navbar fixed-top navbar-expand-sm bg-dark-degrade navbar-dark">
-		<a class="navbar-brand justify-content-sm-end" href="">
-           	<img src="../../imagens/logo/logo2018h300.png" class="img-fluid" alt="SisCCZ Logo">
-       	</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-	</nav>
-	<br/>
-	<nav class="navbar navbar-expand-sm bg-dark-degrade fixed-top-2 navbar-menu">
-   	</nav>
-	<main role="main" class="container-fluid p-t-135">
-	</main>
-	<br>
-    <footer class="footer">
-		<div class="container text-center">
-			<img src="../../imagens/logo/nomefooter.png" class="img-fluid" alt="SisCCZ Logo">      
+	
+	<div class="limiter">
+		<div class="container-ec m-t-20">
+            <img class="img-resp" src="../../../../imagens/em_desenvolvimento/ec.png" alt="SisCCZ">
 		</div>
-    </footer>
+		<br>
+		<div class="text-center ec">
+			<a href="#" onclick="history.go(-1)"><i class="fa fa-arrow-left fa-3x"></i></a> &nbsp;           
+            <a href="../../../../paginas/principal"><i class="fa fa-home fa-3x"></i></a>
+		</div>
+	</div>
+	
+
 	
 <!--===============================================================================================-->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -40,15 +35,15 @@
 	<script>
 		$(document).ready(function(){
 			//SESSION
-			$.post('../../php/login/session.php',
+			$.post('../../../../php/login/session.php',
 				function(retorno) {
 					if (retorno[0].primeiro_acesso == 1 || retorno[0].primeiro_acesso == 3){
 						if (!$('.form_editar_perfil')[0]) {
-							window.location.href = ('../../paginas/principal/editar_perfil');
+							window.location.href = ('../../../../paginas/principal/editar_perfil');
 						}
 					} else {
 						if ($('.container-login100')[0]) {
-						   	window.location.href = ('../../paginas/principal');
+						   	window.location.href = ('../../../../paginas/principal');
 						} else {
 							session_usuario = retorno[0].usuario;
 							session_nome = retorno[0].nome;
@@ -59,20 +54,16 @@
 							var hoje = datac.getFullYear()+'-'+("0" + (datac.getMonth() + 1)).slice(-2)+'-'+("0" + datac.getDate()).slice(-2);
 							$('#nome_usuario_sessao').text(session_apelido);
 							if (hoje != session_ultimo_acesso){
-								$.post('../../php/login/session_atualiza.php',function(retorno) {});
+								$.post('../../../../php/login/session_atualiza.php',function(retorno) {});
 							}
 						}
 					}
 				},'json'
-			)
-			.fail(function(){
+		  	).fail(function(){
 				if (!$('.container-login100')[0]) {
-			    	window.location.href = ('../../');
+			    	window.location.href = ('../../../../');
 			    }
 		  	});
-			//MENU
-			$('.navbar-menu').load("../../paginas/principal/menu.html");
-
 		});			
     </script>
 </body>
