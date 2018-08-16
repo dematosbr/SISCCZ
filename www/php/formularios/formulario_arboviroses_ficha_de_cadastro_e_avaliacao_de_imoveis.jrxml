@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="formulario_arboviroses_ficha_de_cadastro_e_avaliacao_de_imoveis" language="groovy" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="6378c996-a2d1-45e5-bd5c-3d44ce07b1fa">
+	<property name="ireport.zoom" value="2.143588810000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select n_regist from
+tbl_arboviroses_dengue_casos_suspeitos
+where n_regist = 1 and ano = 2018]]>
+	</queryString>
+	<field name="n_regist" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="46" y="4" width="131" height="10" uuid="bd6e5f5e-4714-4ffa-9f02-ce61b2bb01ab"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arimo" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prefeitura de São José dos Campos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="13" width="131" height="10" uuid="e18c45e9-988e-404d-b530-8a610afa91eb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arimo" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Secretaria de Saúde]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="22" width="131" height="10" uuid="c8dbe691-ec6a-4ffd-8486-0288d8a4a291"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arimo" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Centro de Controle de Zoonoses]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="40" height="40" uuid="6d85d233-5d66-48be-9cf6-dc2809fe8246"/>
+				<imageExpression><![CDATA["N:\\imagens\\brasao\\brasao_preto.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="42" y="4" width="1" height="30" uuid="d996e803-fcdd-4770-9665-936e4cd1735d"/>
+			</line>
+			<line>
+				<reportElement x="177" y="4" width="1" height="30" uuid="5abdb1a2-6cce-40a3-a1da-9d48f7240482"/>
+			</line>
+			<image>
+				<reportElement x="182" y="6" width="61" height="26" uuid="d3816539-ae40-465b-bee8-dc0c415eb59e"/>
+				<imageExpression><![CDATA["N:\\imagens\\logo\\logo_preto.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="247" y="4" width="1" height="30" uuid="e0047490-56f1-4461-9960-d829356cd405"/>
+			</line>
+			<staticText>
+				<reportElement x="254" y="5" width="313" height="26" uuid="74f24871-d342-48d0-8983-3e1ac858830e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arimo" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ficha de Cadastro e Avaliação de Imóveis]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="41" width="567" height="1" forecolor="#999999" uuid="3afe29cd-fd42-49dd-915b-86c9165a62cc"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="720" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="28" height="18" uuid="f766c733-2578-404d-bff3-0f8f8cbd4f25"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="28" y="2" width="110" height="18" backcolor="#E2DFDF" uuid="21f85930-7a09-4eba-a7de-b174f0c9a64a"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[_____/_____/_________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="2" width="51" height="18" uuid="ca1d054b-7b09-4e0c-8310-6a2b2876fbd4"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Município]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="192" y="2" width="375" height="18" backcolor="#E2DFDF" uuid="24f6b4f1-8dc3-43fe-9814-829f2fa2295c"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[São José dos Campos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="28" width="67" height="12" uuid="c2c29548-76dd-45f8-aff0-a0f29a1f03a0"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Classificação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="43" width="78" height="18" uuid="9a022af9-0ec5-46d8-897d-e0c3cb105242"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo do Imóvel]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="85" y="43" width="18" height="18" backcolor="#E2DFDF" uuid="bc3a623e-92d5-49f3-b2ea-c695a3740269"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="106" y="43" width="100" height="18" uuid="195c2dd7-5b0f-426b-b90c-5fe48c7f9040"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1 - Ponto Estratégico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="43" width="90" height="18" uuid="eb2e070a-e5ee-4435-8c96-6233d12d7642"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2 - Imóvel Especial]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="210" y="43" width="18" height="18" backcolor="#E2DFDF" uuid="3eabbfb3-b453-4867-a404-4f77b355833e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="345" y="43" width="100" height="18" uuid="c46a07e7-6828-40bd-a933-d7503b108798"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[3 - Obra]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="324" y="43" width="18" height="18" backcolor="#E2DFDF" uuid="647c3aee-e700-4031-ae1f-6e375f3ee2d8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="94" y="65" width="24" height="18" uuid="194ecbea-9cee-447b-89fb-f26e01bd6109"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sim]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="65" width="65" height="18" uuid="4e3b070c-1e27-4a3c-afb6-0c78a4526740"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cadastrado]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="73" y="65" width="18" height="18" backcolor="#E2DFDF" uuid="e86157d6-7053-44b8-9b05-3cfb2b120bdf"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="142" y="65" width="24" height="18" uuid="0ca76a4f-1df6-49cf-9f98-f38939acd0b5"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Não]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="121" y="65" width="18" height="18" backcolor="#E2DFDF" uuid="af3294cd-6ca1-4be3-8a41-047f79dfe916"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="169" y="65" width="104" height="18" uuid="113dcf0d-4c25-42d0-a065-205076dd6705"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número do Cadastro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="273" y="65" width="95" height="18" backcolor="#E2DFDF" uuid="9cef1eb5-ed75-40ce-9191-4d09ea2823ec"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="1" y="23" width="566" height="65" uuid="a519adc3-c42b-4e47-828a-cf194d642566"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="91" width="121" height="12" uuid="6fe800d1-8e0e-4729-a134-835c879ec488"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Identificação do Imóvel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="106" width="80" height="18" uuid="c9059b03-adb0-42fc-ba02-77636e22b6d4"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome Fantasia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="80" y="106" width="487" height="18" backcolor="#E2DFDF" uuid="8e3f025e-a816-4f6f-bf68-f054f3c06663"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="28" y="127" width="56" height="18" backcolor="#E2DFDF" uuid="d55eb124-639b-447e-9fb1-8739f6ea9124"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="127" width="28" height="18" uuid="07fb0552-04e2-4784-ba62-46b7042e9af2"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="127" width="85" height="18" uuid="e00ad6e7-a37d-413f-b357-5cbc69063865"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor Censitário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="172" y="127" width="138" height="18" backcolor="#E2DFDF" uuid="6d07a265-c7e5-458f-b84f-66ebcc4078a2"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="356" y="127" width="77" height="18" backcolor="#E2DFDF" uuid="006c640f-ed45-420c-a477-cea626d55286"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="127" width="43" height="18" uuid="b00a66a2-75ca-412f-a5d9-d650e8749634"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quadra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="56" y="148" width="511" height="18" backcolor="#E2DFDF" uuid="1399e5a2-a6a5-4fd1-a7d7-7fe0e4796336"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="148" width="56" height="18" uuid="fa1fdba3-3a89-42ad-86fd-fc0b103765c9"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="169" width="567" height="18" backcolor="#E2DFDF" uuid="6efda013-22c6-4411-ac40-bab6a60b69fe"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="182" y="190" width="185" height="18" backcolor="#E2DFDF" uuid="56467cda-d782-41a0-891e-8c334d18f7c7"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="190" width="182" height="18" uuid="19f60c0c-67bb-4f0d-af3d-9bfa15999bec"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Coordenadas (Latitude, Longitude)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="382" y="190" width="185" height="18" backcolor="#E2DFDF" uuid="d00a9cd5-b68d-4355-937b-663a22e91121"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="190" width="15" height="18" uuid="6c3ebbc4-6fa7-4673-813a-65381c4724f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="211" width="80" height="18" uuid="036f0474-773b-4e80-a251-cfe42a1d1981"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área Total (m²)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="80" y="211" width="112" height="18" backcolor="#E2DFDF" uuid="9173e57c-13c4-45be-8882-6b91e2b2ac80"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="211" width="48" height="18" uuid="4999b5c1-ffe1-4863-81d3-40061d702817"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="412" y="211" width="155" height="18" backcolor="#E2DFDF" uuid="ca139fa2-022b-4ad6-900a-c31a70a485f7"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="398" y="211" width="15" height="18" uuid="3076eecb-c3b9-4f78-a838-e351f11648ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="243" y="211" width="155" height="18" backcolor="#E2DFDF" uuid="1fb2bb06-e987-4373-a24e-ccad69c490a7"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="232" width="56" height="18" uuid="12d58868-13f1-4d79-abba-b9782a74c74b"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contatos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="56" y="232" width="511" height="18" backcolor="#E2DFDF" uuid="349ebe4c-ca40-4dd8-a51d-734464be0ca3"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="91" y="253" width="18" height="18" backcolor="#E2DFDF" uuid="a8749662-e7c5-4071-ba33-ef19ccbcdba7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="253" width="89" height="18" uuid="e9ccd475-3584-4b59-b2ae-d8613b785f25"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsabilidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="253" width="55" height="18" uuid="120de032-b1fa-428d-b9ed-09fae6e63a96"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1 - Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="253" width="58" height="18" uuid="28418829-c05d-461a-a390-4984323277d9"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2 - Estadual]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="169" y="253" width="18" height="18" backcolor="#E2DFDF" uuid="375dbdec-e458-429e-b4f0-46bf91da8762"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="271" y="253" width="65" height="18" uuid="9a8ecf3b-7bff-40a3-9d47-137024d3ab9b"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[3 - Municipal]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="250" y="253" width="18" height="18" backcolor="#E2DFDF" uuid="64c4dac2-472e-4e9e-af15-506ab9409f9c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="339" y="253" width="18" height="18" backcolor="#E2DFDF" uuid="250434cb-0cd8-412c-ad06-7222a77081ca"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="360" y="253" width="65" height="18" uuid="1791d727-c1b4-49f2-a50c-f2056e0ced1e"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[4 - Privado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="276" width="121" height="12" uuid="005729aa-ef49-4886-b5eb-0f30eabb4bec"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Avaliação de Risco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="290" width="40" height="18" uuid="2974080d-c28a-4a81-8f03-f034184d40cd"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1 - Sim]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="290" width="160" height="18" uuid="ff2c3838-14e8-4e1d-959f-d6ed8385c24c"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área Densamente Povoada (PE)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="162" y="290" width="18" height="18" backcolor="#E2DFDF" uuid="066f667f-0d11-4eb4-8cad-3b5515724650"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="225" y="290" width="18" height="18" backcolor="#E2DFDF" uuid="8a9e6652-88c0-49f1-b8e7-d545527e0a01"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="245" y="290" width="40" height="18" uuid="fd28343c-7488-4f72-8c66-84e9acd14f9a"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2 - Não]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="311" width="59" height="18" uuid="234c93bc-4ed1-4d18-95f8-a69c5c12c929"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pontuação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="142" y="311" width="240" height="18" backcolor="#E2DFDF" uuid="4aa2783e-e5e1-48cc-a3ad-0fe99847e960"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="311" width="142" height="18" uuid="4d7765e2-25c7-4bc5-ac91-529743b218c6"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Atividade Principal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="446" y="311" width="121" height="18" backcolor="#E2DFDF" uuid="fb6418a5-2c92-4d28-8aaa-5b354a7a5039"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="332" width="142" height="18" uuid="baa7bd98-cc87-429d-8f5f-5eb542b4aa0e"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Recipientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="142" y="332" width="240" height="18" backcolor="#E2DFDF" uuid="5470d102-33c2-4832-9493-bed2b0b09ddc"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="332" width="59" height="18" uuid="74b759cc-6db6-4063-8d76-0e4200e884f3"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pontuação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="446" y="332" width="121" height="18" backcolor="#E2DFDF" uuid="6bdb36e3-a170-4a33-837f-df71c8f6098d"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="142" y="353" width="240" height="18" backcolor="#E2DFDF" uuid="d4822289-507d-4c9e-8818-e53d2a320de3"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="353" width="142" height="18" uuid="a5d56429-1874-4894-9f25-7ce8af46eaf9"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuidados do Responsável]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="446" y="353" width="121" height="18" backcolor="#E2DFDF" uuid="c4a29a7e-cf7c-4724-a2b6-b3c34ce82792"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="353" width="59" height="18" uuid="5582d19b-a600-48ec-8b11-7e0adaf11c24"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pontuação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="374" width="59" height="18" uuid="96f1cb33-5e09-42c5-a4f5-ec44dec22721"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pontuação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="446" y="374" width="121" height="18" backcolor="#E2DFDF" uuid="f31aa9b3-4e18-425d-be4b-f34b74abc97e"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="142" y="374" width="240" height="18" backcolor="#E2DFDF" uuid="8c64ffff-9b1c-45dd-8a95-964f8e028973"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="374" width="142" height="18" uuid="5df4aa00-47b1-44ff-a821-5e7fbdb151c5"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº de Pavimentos (Obras)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="446" y="395" width="121" height="18" backcolor="#E2DFDF" uuid="a0dbb612-0c8a-45df-bf47-0fb389b9ba55"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="395" width="59" height="18" uuid="7eb61a12-963f-4196-acf7-58854cccd1e8"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="416" width="166" height="18" uuid="e9631fc5-4bbe-4d77-9e35-da7799e63d01"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsável pelo Preenchimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="166" y="416" width="401" height="18" backcolor="#E2DFDF" uuid="44a092bf-b378-4f04-9e43-c8555f6df3a0"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="1" y="440" width="280" height="280" uuid="eb0f508c-edae-4b95-8477-09b46f09ff99"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="445" width="105" height="12" uuid="e746f27a-0488-4af7-b9d8-82c2a3f141a0"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipos de Atividades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="445" width="134" height="12" uuid="d224f829-e476-4c42-a9a0-1267cfc7c761"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Recipientes]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="286" y="440" width="280" height="90" uuid="a429d8dd-c020-4a76-8fcc-e5c2a7648546"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="460" width="132" height="18" uuid="4e9fcfb0-4af0-423b-97d3-99443ef9e872"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1 - Pontos Estratégicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="478" width="154" height="15" uuid="357ed477-8ee6-4f56-a2e1-2150c39e31cd"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Relacionado a Pneumáticos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="493" width="154" height="15" uuid="4b45b0fb-f10b-4819-b8e9-01d69ef1b451"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Relacionado a Reciclagem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="508" width="154" height="15" uuid="7b37e95a-40b9-4f54-bccf-36868c910734"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Relacionado a Transportes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="523" width="154" height="15" uuid="0dfd9c01-32f3-4b1d-a7da-9c035e96e8fc"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Relacionado a armazenamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="538" width="154" height="15" uuid="ff13c69d-1ea5-4763-8ed6-3bd345242ac7"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Outros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="493" width="111" height="15" uuid="34807c52-9c5e-403d-9292-10f76be0aa81"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[20 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="538" width="111" height="15" uuid="45bce0c2-5c6e-4ab0-b4e2-27921160a95a"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[5 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="508" width="111" height="15" uuid="df7c617a-f219-4821-aa0b-1c51759e21e3"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[10 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="478" width="111" height="15" uuid="75be06de-3eef-4b0b-8826-c3242ff85243"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[20 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="523" width="111" height="15" uuid="19902390-a3df-4ffe-b64b-5f96a0635a19"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[10 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="617" width="111" height="15" uuid="cadda55a-6c4c-432b-b14e-a2873ee97476"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[10 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="587" width="154" height="15" uuid="73036e0c-df52-440f-97b0-c870ff4239f9"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Estabelecimentos de Saúde]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="632" width="154" height="15" uuid="6e6b359b-312d-4129-be2b-cda78fc9209d"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Outros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="572" width="111" height="15" uuid="b6275a74-c7fe-4e24-9020-d53a72e65362"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[20 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="632" width="111" height="15" uuid="0f9b8b13-5e1c-441a-9a3e-2c3a76ba08e8"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[5 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="602" width="111" height="15" uuid="7d9ddbed-1793-4954-be9a-4877710b8836"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[10 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="587" width="111" height="15" uuid="453e3461-3326-4f4a-91fa-66f80118821c"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[20 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="554" width="132" height="18" uuid="b9db4591-bf87-4c15-83b4-43371cbbccf3"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2 - Imóveis Especiais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="602" width="154" height="15" uuid="a1e0f19d-25f1-4e47-9987-1b0c78398c99"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[População Circulante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="617" width="154" height="15" uuid="53fe460f-363f-479f-b275-32ff8ea0b66c"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[População Fixa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="572" width="154" height="15" uuid="f1437caf-3fa7-45f3-ad76-c861c60fd297"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Estabelecimentos de Ensino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="697" width="111" height="15" uuid="bc25655e-4a1b-4e4a-b0c6-1714da83975f"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[5 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="682" width="154" height="15" uuid="40c775d7-339a-4df6-97d8-48196ca88250"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Inativa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="697" width="154" height="15" uuid="8e862e45-6efb-427a-b962-a397a0b9145c"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Em Atividade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="682" width="111" height="15" uuid="80d891b7-3960-4a28-b01c-67f94a81c55f"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[20 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="667" width="111" height="15" uuid="d67de7ca-47c1-4206-bfff-66a981af6447"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[20 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="667" width="154" height="15" uuid="7d556eba-1d64-487b-8dd8-fba33e006564"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Abandonada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="649" width="132" height="18" uuid="ad56dac3-1fed-427b-bad5-dd94e44783c4"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3 - Obras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="505" width="111" height="15" uuid="04c93712-6cf3-4ca3-8646-820c9878b731"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[30 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="475" width="154" height="15" uuid="56a2f9fb-c4f8-4dc6-9b17-78bfcc9af614"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Até 100 recipientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="460" width="111" height="15" uuid="0eecf344-6433-423a-9d09-769e627c8b86"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[5 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="475" width="111" height="15" uuid="13736ceb-88ce-4b4b-bd0f-b2ec994a4cf0"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[10 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="490" width="111" height="15" uuid="a574aac5-9c42-4290-8608-b6936a83aaed"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[20 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="490" width="154" height="15" uuid="5652341e-c34e-4ee5-bd65-0c56e1e80eee"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Até 300 recipientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="505" width="154" height="15" uuid="f5b13593-07df-4e23-a872-9699f728f3f0"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Acima de 300 recipientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="460" width="154" height="15" uuid="658fa13b-f15e-43ee-822e-7b73e936aa1e"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Até 20 Recipientes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="540" width="134" height="12" uuid="2520c35f-7db6-4ed1-9f03-c5b56e575eb9"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuidados do Responsável]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="570" width="154" height="15" uuid="d9438fd6-d503-4a0e-99c2-840ecff635d7"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Parcial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="555" width="154" height="15" uuid="9825bb0a-a6cf-42a0-9342-ee3cc69b9499"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Adequado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="570" width="111" height="15" uuid="5bdc6fec-8832-4a12-b36d-cee34f0a244b"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[30 Pontos]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="286" y="535" width="280" height="75" uuid="af2f0813-37cc-4c28-be98-c369443c23a9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="291" y="585" width="154" height="15" uuid="762aae2b-ecb4-4d1d-b89b-793ad5973e4f"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sem Adoção de Cuidados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="585" width="111" height="15" uuid="7493cb27-5610-405a-9c8f-1ec8a1b35f58"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[100 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="555" width="111" height="15" uuid="0a044714-a4cb-41ca-a89a-d79c8f7a3f91"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[0 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="622" width="269" height="12" uuid="6f7fa051-5de1-4f97-ae81-bc79ac93eadc"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de Pavimentos para Serem ou]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="665" width="154" height="15" uuid="8150f320-1a4d-4aa5-a6fa-9b15d09c623d"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[De 3 a 10 pavimentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="650" width="154" height="15" uuid="dfa0994a-0406-439b-97ce-fa5312eeda30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Até 3 pavimentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="665" width="111" height="15" uuid="7cf5f231-ad48-448a-81a8-019f0a529059"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[20 Pontos]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="286" y="617" width="280" height="103" uuid="6306fe50-c7f8-4ac9-85aa-61eb1355a643"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="291" y="680" width="154" height="15" uuid="54b6e727-ce91-4a12-82fb-f281f82869f5"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[De 10 a 20 pavimentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="695" width="154" height="15" uuid="fb31016c-70a3-42f4-9e01-f50ca64ceeca"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Acima de 20 pavimentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="680" width="111" height="15" uuid="422d0c33-dc7c-4651-96a7-41f22bd49cc3"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[30 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="695" width="111" height="15" uuid="dd03a238-63e5-4820-9c89-abf9a9ae180b"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[40 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="650" width="111" height="15" uuid="a724f96c-d0ee-428a-b004-5552159cbb12"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="false"/>
+				</textElement>
+				<text><![CDATA[10 Pontos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="635" width="269" height="12" uuid="b2056a57-75db-4162-9ccb-d2bb199a37d8"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arimo" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Construídos (Apenas para Obras)]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>
