@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>SisCCZ</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="../../../imagens/icone/favicon.ico"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../../../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../../../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../../../css/sweetalert.css">
+</head>
+<body class="fadeIn">
+	<nav class="navbar fixed-top navbar-expand-sm bg-dark-degrade navbar-dark">
+		<a class="navbar-brand justify-content-sm-end" href="">
+           	<img src="../../../imagens/logo/logo2018h300.png" class="img-fluid" alt="SisCCZ Logo">
+       	</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+	<br/>
+	<nav class="navbar navbar-expand-sm bg-dark-degrade fixed-top-2 navbar-menu">
+	</nav>
+	<aside id="aside">
+		<ul class="nav nav-tabs tn-justified" role="tablist" tabindex="0" id="abas_filtro_mapa">
+			<li role="presentation" id="aba_datas"><a href="#datas" aria-controls="datas" role="tab" data-toggle="tab">DATA</a></li>
+			<li role="presentation" id="aba_pontos"><a href="#pontos" aria-controls="pontos" role="tab" data-toggle="tab">PONTOS</a></li>
+			<li role="presentation" id="aba_poligonos"><a href="#poligonos" aria-controls="poligonos" role="tab" data-toggle="tab">POLÍGOooolS</a></li>
+		</ul>
+		<ul class="nav nav-tabs tn-justified" role="tablist" tabindex="0" id="abas_filtro_mapa">
+			<li role="presentation" id="aba_datas"><a href="#datas" aria-controls="datas" role="tab" data-toggle="tab">DATA</a></li>
+			<li role="presentation" id="aba_pontos"><a href="#pontos" aria-controls="pontos" role="tab" data-toggle="tab">PONTOS</a></li>
+			<li role="presentation" id="aba_poligonos"><a href="#poligonos" aria-controls="poligonos" role="tab" data-toggle="tab">POLÍGONOS</a></li>
+		</ul>
+		
+	</aside>
+	<main role="main" class="container-fluid p-t-130 p-b-50">
+		<nav aria-label="breadcrumb" class="d-none d-sm-block d-md-block d-lg-block">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="../../principal">SisCCZ</a></li>
+		    <li class="breadcrumb-item"><a href="../">Arboviroses</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Mapa</li>
+		  </ol>
+		</nav>		   	
+		<div class="row text-center">
+			<div id="mapa_full" name="mapa_full">
+			</div>
+			<div id="funcoes" class="hidden-print fundobranco ">
+				<input id="pac-input" class="controls" type="text" placeholder="Pesquise um endereço aqui">
+				<h5 class="">
+					<i class="fas fa-filter fa-xs" id="aside-trigger" data-trigger="aside" data-link="filtro.html"></i>
+				</h5>
+			</div>
+		</div>
+	</main>
+	<br>
+    <footer class="footer">
+		<div class="container text-center">
+			<img src="../../../imagens/logo/nomefooter.png" class="img-fluid" alt="SisCCZ Logo">      
+		</div>
+    </footer>
+	
+<!--===============================================================================================-->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtROQzr0_LK2R0BDoR5tphVCyNIJO9s_I&libraries=drawing,geometry,places"></script>
+	<script src="../../../plugins/maplabel/maplabel-compiled.js"></script>
+			
+	<script>
+		$(document).ready(function(){
+			//VARIÁVEIS
+			mapa_full = '';
+			markers = [];
+			labels = [];
+			//SESSION
+			$.post('../../../php/login/session.php',
+				function(retorno) {
+					if (retorno[0].primeiro_acesso == 1 || retorno[0].primeiro_acesso == 3){
+						if (!$('.form_editar_perfil')[0]) {
+							window.location.href = ('../../../paginas/principal/editar_perfil');
+						}
+					} else {
+						if ($('.container-login100')[0]) {
+						   	window.location.href = ('../../../paginas/principal');
+						} else {
+							session_usuario = retorno[0].usuario;
+							session_nome = retorno[0].nome;
+							session_genero = retorno[0].genero;
+							session_apelido = retorno[0].apelido;
+							session_ultimo_acesso = retorno[0].ultimo_acesso ;
+							var datac = new Date();
+							var hoje = datac.getFullYear()+'-'+("0" + (datac.getMonth() + 1)).slice(-2)+'-'+("0" + datac.getDate()).slice(-2);
+							$('#nome_usuario_sessao').text(session_apelido);
+							if (hoje != session_ultimo_acesso){
+								$.post('../../../php/login/session_atualiza.php',function(retorno) {});
+							}
+						}
+					}
+				},'json'
+			)
+			.fail(function(){
+				if (!$('.container-login100')[0]) {
+			    	window.location.href = ('../../../');
+			    }
+		  	});
+			//MENU
+			$('.navbar-menu').load("../../../paginas/principal/menu.html");
+			//PERMISSÃO
+			$.post('../../../paginas/ti/sistemas/php/sistemas_acesso_pesquisar.php',{codigo_sistema:'01050000'},
+				function(acesso) {
+					//CARREGAR GOOGLE MAPS
+					var latlng = new google.maps.LatLng(-23.07113619432355,-45.889434814453125);
+					mapa_full = new google.maps.Map(document.getElementById("mapa_full"),{
+						zoom: 10,
+						center:latlng,
+						mapTypeId: google.maps.MapTypeId.ROADMAP,
+						mapTypeControl: true,
+						scaleControl: true,
+						streetViewControl: true,
+						zoomControl: true,
+						mapTypeControlOptions: {
+							style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+						    position: google.maps.ControlPosition.TOP_RIGHT,
+						},					
+						streetViewControlOptions: {
+							position: google.maps.ControlPosition.RIGHT_TOP
+						},
+						fullscreenControlOptions: {
+							position: google.maps.ControlPosition.RIGHT_TOP
+						},
+						zoomControlOptions: {
+							position: google.maps.ControlPosition.RIGHT_TOP
+						},
+						styles:[
+							{
+					    		featureType: 'poi',
+					            stylers: [{visibility: "off"}]
+					        },
+					        {
+					            featureType: 'road.highway',
+					            elementType: 'labels.text.fill',
+					            stylers: [{color: '#6c7478'}]
+					        },
+					        {
+								featureType: "road.highway",
+								elementType: "labels.icon",
+					            stylers: [{ visibility: "off" }]
+					        },
+							{
+								featureType: "road",
+							  	elementType: "labels.icon",
+							 	stylers: [{visibility: "off"}]
+							},					            					            
+							{
+						        featureType: "transit.station.bus",
+						        stylers: [{ visibility: "off" }]
+						    }					            				            
+            			]
+					});
+					//EXIBIR FUNÇÕES NO GOOGLE MAPS
+					mapa_full.controls[google.maps.ControlPosition.RIGHT_TOP].push(document.getElementById('funcoes'));
+					//BUSCA GOOGLE MAPS
+					var input = (document.getElementById('pac-input'));
+					var searchBox = new google.maps.places.SearchBox((input));
+					mapa_full.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+			        mapa_full.addListener('bounds_changed', function() {
+			       		searchBox.setBounds(mapa_full.getBounds());
+			        });					
+					searchBox.addListener('places_changed', function() {
+          				var places = searchBox.getPlaces();
+				        if (places.length == 0) {
+				           	return;
+				        }
+          				markers.forEach(function(marker) {
+            				marker.setMap(null);
+          				});
+          				markers = [];
+          				var bounds = new google.maps.LatLngBounds();
+          				places.forEach(function(place) {
+            				if (!place.geometry) {
+              					console.log("Returned place contains no geometry");
+              					return;
+            				}
+	            			var icon = {
+				            	size: new google.maps.Size(71, 71),
+				            	origin: new google.maps.Point(0, 0),
+				            	anchor: new google.maps.Point(17, 34),
+				            	scaledSize: new google.maps.Size(25, 25)
+	            			};
+            				markers.push(new google.maps.Marker({
+			              		map: mapa_full,
+			              		icon: icon,
+			              		title: place.name,
+			              		position: place.geometry.location
+            				}));
+            				if (place.geometry.viewport) {
+              					bounds.union(place.geometry.viewport);
+            				} else {
+              					bounds.extend(place.geometry.location);
+            				}
+          				});
+          				mapa_full.fitBounds(bounds);
+        			});
+        			//CARREGAR LAYERS GOOGLE MAPS
+        			area_setor = new google.maps.Data({map: mapa_full, style: {strokeColor: '#03A9F4', strokeOpacity: 1, strokeWeight:1.5} });
+					area_setor.loadGeoJson('../../../mapas/layers/area_setor.geojson');
+					limite_sjc = new google.maps.Data({map: mapa_full, style: {strokeColor: '#063a5e', strokeOpacity: 1, strokeWeight:1.5} });
+					limite_sjc.loadGeoJson('../../../mapas/layers/limite_sjc.geojson');
+					/*quadras_sjc = new google.maps.Data({map: mapa_full, style: {strokeColor: '#d5d5d5', strokeOpacity: 1, strokeWeight:1.5} });
+					quadras_sjc.loadGeoJson('../../../mapas/layers/quadras_sjc.geojson');*/
+        			
+        			//LABEL AREAS
+					$.post('../../../paginas/ti/cadastros/php/area_label_pesquisar.php', 
+						function(data) {
+							var tamanho = Object.keys(data).length;
+							var i = 0;
+							while (i <= (tamanho-1)) {
+								var area_setor = data[i].area;
+						        var mapLabel = new MapLabel({
+							          text: area_setor,
+							          position: new google.maps.LatLng(data[i].latitude,data[i].longitude),
+							          map: mapa_full,
+							          font:'Arimo',
+							          fontColor:'#03A9F4',
+							          fontSize: 15,
+									  strokeWeight:5,
+							          align: 'center'
+						        });
+					        	labels.push(mapLabel);				
+								i++;
+							}
+						},'json'
+					);        			
+        			//EXIBIR ASIDE 
+					$('#aside-trigger').click(function(e){            
+			            e.preventDefault();
+			            var x = $(this).data('trigger');
+			            $(x).toggleClass('toggled');
+	        	    });
+	        	    
+				},'json'
+			).fail(function(){
+				swal({   
+					text: 'Acesso Negado.',
+					icon: "../../../imagens/logo/logo2018h300.png",
+					closeModal: false,
+					closeOnClickOutside: false,	
+					closeOnEsc: false
+				}).then(function() {
+				    swal.close();
+				  	window.location.href = ('../../../paginas/principal'); 
+				});
+        	});
+		});			
+    </script>
+</body>
+</html>
