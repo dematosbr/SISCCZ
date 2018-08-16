@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="formulario_arboviroses_ficha_de_cadastro_e_avaliacao_de_imoveis" language="groovy" pageWidth="595" pageHeight="842" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="6378c996-a2d1-45e5-bd5c-3d44ce07b1fa">
+	<property name="ireport.zoom" value="3.797498335832415"/>
+	<property name="ireport.x" value="379"/>
+	<property name="ireport.y" value="294"/>
+	<queryString>
+		<![CDATA[select n_regist from
+tbl_arboviroses_dengue_casos_suspeitos
+where n_regist = 1 and ano = 2018]]>
+	</queryString>
+	<field name="n_regist" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="46" y="4" width="131" height="10" uuid="bd6e5f5e-4714-4ffa-9f02-ce61b2bb01ab"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arimo" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prefeitura de São José dos Campos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="13" width="131" height="10" uuid="e18c45e9-988e-404d-b530-8a610afa91eb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arimo" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Secretaria de Saúde]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="22" width="131" height="10" uuid="c8dbe691-ec6a-4ffd-8486-0288d8a4a291"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arimo" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Centro de Controle de Zoonoses]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="40" height="40" uuid="6d85d233-5d66-48be-9cf6-dc2809fe8246"/>
+				<imageExpression><![CDATA["N:\\imagens\\brasao\\brasao_preto.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="42" y="4" width="1" height="30" uuid="d996e803-fcdd-4770-9665-936e4cd1735d"/>
+			</line>
+			<line>
+				<reportElement x="177" y="4" width="1" height="30" uuid="5abdb1a2-6cce-40a3-a1da-9d48f7240482"/>
+			</line>
+			<image>
+				<reportElement x="182" y="6" width="61" height="26" uuid="d3816539-ae40-465b-bee8-dc0c415eb59e"/>
+				<imageExpression><![CDATA["N:\\imagens\\logo\\logo_preto.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="247" y="4" width="1" height="30" uuid="e0047490-56f1-4461-9960-d829356cd405"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
