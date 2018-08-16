@@ -30,16 +30,16 @@
 		    <li class="breadcrumb-item"><a href="../../../../principal">SisCCZ</a></li>
 		    <li class="breadcrumb-item"><a href="../../../">Mapas</a></li>
 		    <li class="breadcrumb-item"><a href="../../">Spring</a></li>
-		    <li class="breadcrumb-item"><a href="../">Matriz A4</a></li>
-		    <li class="breadcrumb-item active" aria-current="page">Inserir</li>
+		    <li class="breadcrumb-item"><a href="../../a4/">Matriz A4</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">Editar</li>
 		  </ol>
 		</nav>
 		<div class="row text-center">
 	    	<div class="col-sm-12 text-center">
-     			<h1 class="display-5">Inserir</h1>
+     			<h1 class="display-5">Editar</h1>
      		</div>
     	</div>
-    	<div class="m-2" name="form_inserir" id="form_inserir">
+    	<div class="m-2" name="form_pesquisar" id="form_pesquisar">
   			<div class="form-row">
 				<div class="form-group col-md-3">
 			    	<label class="fs-20">Área</label>
@@ -51,19 +51,32 @@
 				    </div>
 			  	</div>
 				<div class="form-group col-md-3">
-			    	<label class="fs-20">Nome Mapa</label>
+			    	<label class="fs-20">Mapa</label>
 					<div class="wrap-inputsis">
-						<input class="inputsis desabilitado" type="text" name="MAPA" id="MAPA" placeholder="" readonly tabindex="-1">
+				    	<select class="inputsis required" id="MAPA" name="MAPA">
+				    		<option value="" selected></option>
+				    	</select>
 						<span class="focus-inputsis"></span>
+				    </div>
+			  	</div>
+				<div class="form-group col-md-4">
+					<div class="wrap-inputsis m-t-30">
+						<button class="sisccz-btn-line" name="bt_pesquisar" id="bt_pesquisar">
+							Pesquisar
+						</button>
 					</div>
-  				</div>
+				</div>
+			</div>
+		</div>
+    	<div class="m-2" name="form_resultado" id="form_resultado">
+  			<div class="form-row">
 	  			<div class="form-row col-md-6">
 					<div class="form-group col-md-12 m-t-45">
 						<div class="fileinput fileinput-new" data-provides="fileinput">
 		                	<span class="btn-file m-t-30 m-b-30">
 		                    	<span class="fileinput-new"><i class="fas fa-file-upload"></i>  Selecionar Arquivo</span>
 		                    	<span class="fileinput-exists"><i class="fas fa-sync-alt"></i>  Alterar</span>
-		                    	<input type="file" name="arquivo" id="arquivo" class="required" accept=".pdf">
+		                    	<input type="file" name="arquivo" id="arquivo" class="" accept=".pdf">
 		                    </span>
 		                    <span class="fileinput-filename m-l-10"></span>
 		                    <a href="#" class="close fileinput-exists m-l-10" data-dismiss="fileinput"><i class="fas fa-times-circle"></i></a>
@@ -76,6 +89,8 @@
 				<div class="form-group col-md-3">
 			    	<label class="fs-20">Latitude 1</label>
 					<div class="wrap-inputsis">
+						<input class="inputsis required hide" type="text" name="IDMAPA" id="IDMAPA" placeholder="">
+						<input class="inputsis required hide" type="text" name="NOME" id="NOME" placeholder="">
 						<input class="inputsis required" type="text" name="LAT1" id="LAT1" placeholder="">
 						<span class="focus-inputsis"></span>
 					</div>
@@ -105,7 +120,7 @@
   			<div class="form-row">
 				<div class="form-group col-md-4">
 					<div class="wrap-inputsis">
-						<button class="sisccz-btn" name="bt_inserir" id="bt_inserir">
+						<button class="sisccz-btn" name="bt_editar" id="bt_editar">
 							Salvar
 						</button>
 					</div>
@@ -188,34 +203,35 @@
 			$(this).popularArea();
 			//POPULAR MAPA	
 			$('#AREA').on('change', function (e) {
-			    var area = $(this).val();
+				$('#MAPA').val('');
+				$('#form_resultado').css({display:'none'});	
+				var area = $('#AREA').val();
 			    popularmapa(area);
 			});	
 			function popularmapa(area) {
+				$('#MAPA').empty();
+				$('#MAPA').append('<option value=""></option>');
 				$.post('../../../../../paginas/mapas/spring/a4/php/matriz_spring_a4_pesquisar.php',{area:area},
 					function(data) {
-						if (data != null){
-							var tamanho = Object.keys(data).length;
-							var inteiro = parseInt(tamanho)+1;
-							var tamanho_int = String(inteiro).length;
-							if (tamanho_int != "1"){
-								$('#MAPA').val('M'+(inteiro));
-							} else {
-								$('#MAPA').val('M0'+(inteiro));
-							}
-						} else {
-							$('#MAPA').val('M01');
+						var tamanho = Object.keys(data).length;
+						var i = 0;
+						while (i<=(tamanho - 1)){
+							$('#MAPA').append('<option value="'+data[i].id+'">'+data[i].mapa+'</option>');
+							i++;
 						}
 					},'json'
 				);
 			}
 			//PERMISSÃO
-			$.post('../../../../../paginas/ti/sistemas/php/sistemas_acesso_pesquisar.php',{codigo_sistema:'07010101'},
+			$.post('../../../../../paginas/ti/sistemas/php/sistemas_acesso_pesquisar.php',{codigo_sistema:'07010102'},
 				function(acesso) {
-					//INSERIR
-					$("#bt_inserir").click(function(e){
+				    //OCULTAR
+					$('#form_resultado').css({display:'none'});	
+					//PESQUISAR MAPA
+					$("#bt_pesquisar").click(function(e){
+						$('#form_resultado').css({display:'none'});
 						var erros = 0;
-						$('#form_inserir .required').each(function(){
+						$('#form_pesquisar .required').each(function(){
 							if ($(this).val() == '') { 
 								erros++ ;
 								if ($(this).attr('id')!='funcao'){
@@ -228,9 +244,50 @@
 							}
 						});
 						if (erros > 0 ){
-							$('#AREA').focus();
 							swal({   
-								text:'Você deve preencher todos os campos obrigatórios e selecionar um arquivo.' ,
+								text:'Você deve preencher todos os campos obrigatórios.' ,
+								icon: "../../../../../imagens/logo/logo2018h300.png",
+								closeModal: false,
+								closeOnClickOutside: false,	
+								closeOnEsc: false
+							}).then(function() {
+							    swal.close();
+								$('#AREA').focus();
+							});	
+						} else {
+							var ID = $('#MAPA').val();
+							$.post('../../../../../paginas/mapas/spring/a4/php/matriz_spring_a4_pesquisar.php',{asm:'a', ID:ID},
+								function(data) {
+					        		$('#form_resultado').fadeIn('slow');
+						        	$('#IDMAPA').val(data[0].id);
+						        	$('#NOME').val(data[0].nome);
+						        	$('#LAT1').val(data[0].lat1);
+						        	$('#LNG1').val(data[0].lng1);
+						        	$('#LAT2').val(data[0].lat2);
+						        	$('#LNG2').val(data[0].lng2);
+								},'json'
+							);
+						}		
+					});
+					//EDITAR
+					$("#bt_editar").click(function(e){
+						var erros = 0;
+						$('#form_resultado .required').each(function(){
+							if ($(this).val() == '') { 
+								erros++ ;
+								if ($(this).attr('id')!='funcao'){
+									$(this).css({'background-color' : '#DFD8D1'});
+								}		
+							} else {
+								if ($(this).attr('id')!='funcao'){
+									$(this).css({'background-color' : '#FFFFFF'});
+								}		
+							}
+						});
+						if (erros > 0 ){
+							$('#LAT1').focus();
+							swal({   
+								text:'Você deve preencher todos os campos obrigatórios.' ,
 								icon: "../../../../../imagens/logo/logo2018h300.png",
 								closeModal: false,
 								closeOnClickOutside: false,	
@@ -242,22 +299,24 @@
 		    				var formData = new FormData();
 		    				formData.append('arquivo', $('input[type=file]')[0].files[0]); 
 		    				formData.append('area', $('#AREA').val()); 
+		    				formData.append('nome', $('#NOME').val()); 
 		    				formData.append('mapa', $('#MAPA').val());
 		    				formData.append('lng1', $('#LNG1').val()); 
 		    				formData.append('lng2', $('#LNG2').val()); 
 		    				formData.append('lat1', $('#LAT1').val()); 
 		    				formData.append('lat2', $('#LAT2').val()); 
+		    				formData.append('id', $('#IDMAPA').val()); 
  							$.ajax({
-					            url: '../../../../../paginas/mapas/spring/a4/php/matriz_spring_a4_inserir.php',
+					            url: '../../../../../paginas/mapas/spring/a4/php/matriz_spring_a4_editar.php',
 					            type: 'POST',
 					            data: formData,
 								contentType: false,
 						        cache: false,
 								processData:false,		            
 					        }).done(function(resposta){
-					        	if (resposta == 'inserido'){
+					        	if (resposta == 'editado'){
 									swal({   
-										text:'Matriz Spring inserida com sucesso.'+"\n"+'Deseja inserir outra matriz?' ,
+										text:'Matriz Spring editada com sucesso.'+"\n"+'Deseja editar outra matriz?' ,
 										icon: "../../../../../imagens/logo/logo2018h300.png",
 										closeModal: false,
 										closeOnClickOutside: false,	
@@ -269,7 +328,7 @@
 									}).then(function(value) {
 										switch (value) {
 											case "Sim":
-												window.location = ('../../../../../paginas/mapas/spring/a4/inserir');
+												window.location = ('../../../../../paginas/mapas/spring/a4/editar');
       											break;
     										case "Não":
 												window.location = ('../../../../../paginas/mapas/spring/a4');
@@ -278,14 +337,14 @@
 									});	
 					        	} else {
 									swal({   
-										text:"Ocorreu um erro.",
+										text:'Ocorre um erro.',
 										icon: "../../../../../imagens/logo/logo2018h300.png",
 										closeModal: false,
 										closeOnClickOutside: false,	
 										closeOnEsc: false
 									}).then(function() {
 									       swal.close();
-									       $('#AREA').focus();
+									       $('#LAT1').focus();
 									});	
 					        	}
 					        });	    					
