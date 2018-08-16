@@ -4,7 +4,7 @@
 	<title>SisCCZ</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="imagens/icone/favicon.ico"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">	
 	<script src="https://use.fontawesome.com/1b0c60bcba.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/util.css">
@@ -21,13 +21,13 @@
 			
 				<div class="login100-form validate-form flex-sb flex-w">
                     
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Preenchimento obrigatório">
+					<div class="wrap-input100 m-b-16" data-validate = "Preenchimento obrigatório">
 						<input class="input100" type="text" name="usuario" id="usuario" placeholder="Usuário">
 						<span class="focus-input100"></span>
 					</div>
 					
 					
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Preenchimento obrigatório">
+					<div class="wrap-input100 m-b-16" data-validate = "Preenchimento obrigatório">
 						<input class="input100" type="password" name="senha" id="senha" placeholder="Senha">
 						<span class="focus-input100"></span>
 					</div>
@@ -52,21 +52,40 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
 	<script>
 		$(document).ready(function(){
+			//SESSION
+			$.post('php/login/session.php',
+				function(retorno) {
+					if (retorno[0].primeiro_acesso == 1 || retorno[0].primeiro_acesso == 3){
+						if (!$('.form_editar_perfil')[0]) {
+							window.location.href = ('paginas/principal/editar_perfil');
+						}
+					} else {
+						if ($('.container-login100')[0]) {
+						   	window.location.href = ('paginas/principal');
+						} else {
+							session_usuario = retorno[0].usuario;
+							session_nome = retorno[0].nome;
+							session_genero = retorno[0].genero;
+							session_apelido = retorno[0].apelido;
+							session_ultimo_acesso = retorno[0].ultimo_acesso ;
+							var datac = new Date();
+							var hoje = datac.getFullYear()+'-'+("0" + (datac.getMonth() + 1)).slice(-2)+'-'+("0" + datac.getDate()).slice(-2);
+							$('#nome_usuario_sessao').text(session_apelido);
+							if (hoje != session_ultimo_acesso){
+								$.post('php/login/session_atualiza.php',function(retorno) {});
+							}
+						}
+					}
+				},'json'
+		  	).fail(function(){
+				if (!$('.container-login100')[0]) {
+			    	window.location.href = ('../../');
+			    }
+		  	});
+
+		  	//FOCO
 			$('#usuario').focus();
-			$('.validate-form .input100').each(function(){
-			    $(this).focus(function(){
-			        hideValidate(this);
-			    });
-			});
-			function showValidate(input) {
-				var thisAlert = $(input).parent();
-		 		$(thisAlert).addClass('alert-validate');
-		    }
-		    function hideValidate(input) {
-		        var thisAlert = $(input).parent();
-		        $(thisAlert).removeClass('alert-validate');
-		    }
-			/*LOGIN*/
+			//LOGIN
 			$('#senha').keypress(function(e){
 				var CodTecla = e.which;
 				if (CodTecla == 13){
@@ -95,7 +114,7 @@
 			        }
 			    }
 				if (check == true) {
-					$.post('http://10.1.20.29/sisccz/php/login/login.php',{usuario: $('#usuario').val(), senha:$('#senha').val()},
+					$.post('php/login/login.php',{usuario: $('#usuario').val(), senha:$('#senha').val()},
 						function(data) {
 							if(data=='usuario nao encontrado') {
 								$('#usuario').focus();
@@ -124,10 +143,10 @@
 							        $('#senha').focus();
 								});	
 							} else if(data=='efetuar login') {
-								window.location.href = ('http://10.1.20.29/sisccz/paginas/principal');
+								window.location.href = ('paginas/principal');
 							} else {
 								swal({   
-									text: 'Ocorreu um erro.'.data,
+									text: 'Ocorreu um erro.'+data,
 									icon: "imagens/logo/logo2018h300.png",
 								});	
 							}
