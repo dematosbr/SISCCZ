@@ -1,5 +1,12 @@
 <?php
-//$_POST['estado']="SP";
+header("Content-Type: text/html; charset=utf-8");
+
+
+function retirarEspeciais($texto){
+  $caracteres_especiais = array ("'",'"');
+  return str_replace($caracteres_especiais,"",$texto); 
+}
+
 session_start('login');
 $root = $_SERVER['DOCUMENT_ROOT'];
 $consisccz = $root.'/sisccz/php/conexao/consisccz.php';

@@ -1,4 +1,13 @@
 <?php
+header("Content-Type: text/html; charset=utf-8");
+
+
+function retirarEspeciais($texto){
+  $caracteres_especiais = array ("'",'"');
+  return str_replace($caracteres_especiais,"",$texto); 
+}
+
+
 $_POST['estados']='a';
 if ($_POST){
 	session_start('login');

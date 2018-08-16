@@ -40,11 +40,14 @@ if($_POST) {
 					$atualiza_sql->bindParam(':usuario', retirarEspeciais(mb_strtoupper($_POST['usuario'],'UTF-8')));   		
 					$atualiza_sql->bindParam(':n_acessos',$n_acessos);
 					$atualiza_sql->bindParam(':date', $date);   		
-					$atualiza_sql->execute();			
+					$atualiza_sql->execute();
+					//LOG
+					$filename = $root.'/sisccz/paginas/ti/usuarios/logs/'.$_POST['usuario'].'.txt';
+					$file_data = '<b>[LOGIN]</b> ['.date('d/m/Y H:i:s').']<hr><br>';
+					if (file_exists($filename)){ $file_data .= file_get_contents($filename);}
+					file_put_contents($root.'/sisccz/paginas/ti/usuarios/logs/'.$_POST['usuario'].'.txt', $file_data);
+					//LOG	
 					echo 'efetuar login';
-					$fp2 = fopen($root.'/sisccz/paginas/ti/usuarios/logs/'.$_POST['usuario'].'.txt', 'a');
-					$escreve2 = fwrite($fp2, '<b>[LOGIN]</b><br> | DATA</b> ['.date('d/m/Y H:i:s').'] <br><b>[FIM]</b><br><hr>');
-					fclose($fp2);
 				} else {
 					echo 'senha errada';
 				}
